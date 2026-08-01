@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kontakt — haka-tax Steuerberatung</title>
+<style>
+:root{
+  --white:#F7F7F8; --night:#1F1525; --raspberry:#B9236B; --violet:#58276B;
+  --saffron:#ECA400; --honey:#FFC857; --mix:#D36436; --ink:#1F1525;
+  --bg-grad: linear-gradient(to left, var(--raspberry) 0%, var(--raspberry) 62%, var(--violet) 100%);
+  --y-grad: linear-gradient(to left, var(--saffron), var(--honey));
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;background:var(--white);color:var(--ink);
+  font-family:'Aptos','Segoe UI','Inter',system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.container{max-width:1120px;margin:0 auto;padding:0 24px;}
+
+/* Header */
+header{position:sticky;top:0;background:rgba(247,247,248,.92);backdrop-filter:blur(8px);border-bottom:1px solid #ECEAEC;z-index:50;}
+.nav-inner{max-width:1120px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.logo{font-weight:700;font-size:20px;display:flex;align-items:center;gap:6px;letter-spacing:-0.01em;}
+.logo .dot{width:8px;height:8px;border-radius:2.5px;background:var(--y-grad);display:inline-block;}
+nav.main-nav{display:flex;gap:28px;font-size:14.5px;font-weight:600;}
+nav.main-nav a{opacity:.75;transition:opacity .15s;}
+nav.main-nav a:hover,nav.main-nav a.active{opacity:1;}
+.cta-btn{background:var(--bg-grad);color:var(--white);padding:11px 20px;border-radius:10px;font-size:14px;font-weight:700;white-space:nowrap;}
+.cta-btn.ghost{background:transparent;border:1.5px solid var(--night);color:var(--night);}
+.cta-btn.light{background:var(--white);color:var(--violet);}
+.header-actions{display:flex;align-items:center;gap:12px;}
+.social-btn{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:#fff;border:1.5px solid #ECEAEC;color:var(--night);transition:border-color .15s,color .15s;flex-shrink:0;}
+.social-btn:hover{border-color:var(--raspberry);color:var(--raspberry);}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--night);flex-shrink:0;}
+@media (max-width:860px){
+  header{position:sticky;}
+  nav.main-nav{
+    display:none;
+    position:absolute;
+    top:100%;left:0;right:0;
+    background:#fff;
+    flex-direction:column;
+    gap:2px;
+    padding:10px 24px 18px;
+    border-bottom:1px solid #ECEAEC;
+    box-shadow:0 12px 24px rgba(31,21,37,.08);
+  }
+  nav.main-nav.open{display:flex;}
+  nav.main-nav a{padding:12px 4px;font-size:15.5px;border-bottom:1px solid #F4F2F4;opacity:1;}
+  .nav-toggle{display:flex;align-items:center;justify-content:center;}
+}
+@media (max-width:520px){
+  .header-actions .cta-btn{display:none;}
+}
+
+/* Hero */
+.hero{background:var(--bg-grad);padding:110px 24px 96px;color:var(--white);}
+.hero-inner{max-width:720px;margin:0 auto;text-align:left;}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(247,247,248,.16);padding:6px 12px;border-radius:20px;margin-bottom:20px;}
+.hero h1{font-size:clamp(32px,4.6vw,52px);line-height:1.12;margin:0 0 20px;font-weight:700;letter-spacing:-0.015em;}
+.hero .lead{font-size:17.5px;line-height:1.6;opacity:.92;margin:0 0 32px;max-width:560px;}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
+
+/* Page hero (non-home) */
+.page-hero{background:var(--bg-grad);padding:70px 24px 56px;color:var(--white);}
+.page-hero h1{font-size:clamp(28px,3.6vw,40px);margin:12px 0 10px;font-weight:700;letter-spacing:-0.01em;}
+.page-hero p{font-size:16px;max-width:560px;opacity:.92;line-height:1.55;margin:0;}
+
+section{padding:80px 24px;}
+.section-tight{padding:64px 24px;}
+h2.section-title{font-size:clamp(24px,3vw,32px);font-weight:700;letter-spacing:-0.01em;margin:0 0 14px;color:var(--night);}
+p.section-lead{font-size:16px;color:#5c4a58;max-width:600px;line-height:1.6;margin:0 0 44px;}
+
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+@media (max-width:920px){ .grid-4{grid-template-columns:repeat(2,1fr);} .grid-5{grid-template-columns:repeat(2,1fr);} .grid-3{grid-template-columns:1fr;} .grid-2{grid-template-columns:1fr;} }
+@media (max-width:560px){ .grid-4{grid-template-columns:1fr;} .grid-5{grid-template-columns:1fr;} }
+
+.card{background:#fff;border:1px solid #EFEDEF;border-radius:16px;padding:26px;}
+.card .icon-sq{width:38px;height:38px;border-radius:10px;background:var(--y-grad);margin-bottom:16px;}
+.card h3{font-size:16.5px;margin:0 0 8px;font-weight:700;}
+.card p{font-size:14px;line-height:1.55;color:#5c4a58;margin:0;}
+
+.tag{display:inline-block;font-size:12px;font-weight:700;color:#1F1525;background:var(--y-grad);padding:5px 12px;border-radius:20px;margin-bottom:10px;}
+
+/* Team */
+.person{background:#fff;border:1px solid #EFEDEF;border-radius:16px;overflow:hidden;text-align:left;}
+.avatar{height:180px;background:var(--bg-grad);display:flex;align-items:center;justify-content:center;}
+.avatar span{font-size:40px;font-weight:800;color:var(--white);}
+.person .p-body{padding:20px 20px 24px;}
+.person h3{margin:0 0 4px;font-size:16.5px;}
+.person .role{font-size:13px;color:var(--raspberry);font-weight:700;margin-bottom:10px;}
+.person p{font-size:13.5px;line-height:1.55;color:#5c4a58;margin:0;}
+
+/* Photo placeholder blocks */
+.photo-block{background:var(--bg-grad);border-radius:18px;min-height:220px;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:13px;font-weight:600;opacity:.9;text-align:center;padding:20px;}
+
+/* CTA band */
+.cta-band{background:var(--night);color:var(--white);padding:72px 24px;text-align:center;}
+.cta-band h2{font-size:clamp(22px,3vw,30px);margin:0 0 18px;font-weight:700;}
+.cta-band .cta-btn{margin-top:6px;}
+
+/* Contact form */
+.form-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;}
+@media (max-width:860px){ .form-grid{grid-template-columns:1fr;} }
+form label{display:block;font-size:13px;font-weight:700;margin:0 0 6px;color:var(--night);}
+form .field{margin-bottom:18px;}
+form input,form textarea{
+  width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid #E5E2E5;font-size:14.5px;
+  font-family:inherit;background:#fff;
+}
+form input:focus,form textarea:focus{outline:none;border-color:var(--raspberry);}
+form textarea{min-height:120px;resize:vertical;}
+.checkbox-row{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#5c4a58;margin-bottom:22px;}
+.checkbox-row input{width:16px;height:16px;margin-top:2px;}
+.info-card{background:var(--bg-grad);color:var(--white);border-radius:18px;padding:30px;}
+.info-card h3{margin:0 0 16px;font-size:17px;}
+.info-card p{font-size:14px;line-height:1.7;opacity:.95;margin:0 0 18px;}
+.info-card .line{display:flex;gap:10px;font-size:14px;margin-bottom:10px;opacity:.95;}
+
+/* Footer */
+footer{background:var(--night);color:var(--white);padding:56px 24px 0;}
+.footer-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;}
+@media (max-width:760px){ .footer-inner{grid-template-columns:1fr;gap:28px;} }
+.footer-inner .f-logo{font-weight:700;font-size:20px;margin-bottom:12px;}
+.footer-inner p{font-size:13.5px;line-height:1.6;opacity:.75;margin:0;}
+.footer-inner strong{font-size:13px;letter-spacing:.06em;text-transform:uppercase;opacity:.6;display:block;margin-bottom:12px;}
+.legal-bar{border-top:1px solid rgba(247,247,248,.12);padding:20px 0;font-size:12.5px;opacity:.55;max-width:1120px;margin:0 auto;display:flex;gap:20px;flex-wrap:wrap;}
+.legal-bar a{opacity:1;}
+
+
+/* Value cards (Werte/Verhaltenskodex) */
+.value-card{background:#fff;border:1px solid #EFEDEF;border-radius:16px;padding:26px;border-top:3px solid var(--saffron);}
+.value-card h3{font-size:16.5px;margin:0 0 8px;font-weight:700;color:var(--violet);}
+.value-card p{font-size:14px;line-height:1.6;color:#5c4a58;margin:0;}
+.source-note{font-size:12.5px;color:#8a7a86;margin-top:28px;line-height:1.6;}
+.perk-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+@media (max-width:700px){ .perk-list{grid-template-columns:1fr;} }
+.perk{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid #EFEDEF;border-radius:14px;padding:18px 20px;}
+.perk .dot2{width:8px;height:8px;border-radius:2px;background:var(--y-grad);margin-top:6px;flex-shrink:0;}
+.perk p{margin:0;font-size:14px;line-height:1.55;color:#3a2c37;}
+.job-card{background:#fff;border:1px solid #EFEDEF;border-radius:16px;padding:24px 26px;display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:14px;flex-wrap:wrap;}
+.job-card h3{font-size:16px;margin:0 0 4px;}
+.job-card .meta{font-size:13px;color:#8a7a86;}
+.legal-content{max-width:760px;margin:0 auto;padding:60px 24px 40px;}
+.legal-content h2{font-size:20px;margin:36px 0 12px;color:var(--violet);}
+.legal-content h2:first-child{margin-top:0;}
+.legal-content p, .legal-content li{font-size:14.5px;line-height:1.7;color:#3a2c37;margin:0 0 12px;}
+.legal-content ul{padding-left:20px;}
+.legal-content .fill{background:#FFF3D6;padding:1px 6px;border-radius:4px;color:#7a5a1a;font-weight:600;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="start.html" class="logo">haka-tax<span class="dot"></span></a>
+    <nav class="main-nav">
+      <a href="start.html">Start</a>
+      <a href="leistungen.html">Leistungen</a>
+      <a href="team.html">Team</a>
+      <a href="karriere.html">Karriere</a>
+      <a href="kontakt.html" class="active">Kontakt</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://de.linkedin.com/in/faruk-akkaya-839254229" class="social-btn" target="_blank" rel="noopener" aria-label="haka-tax auf LinkedIn" title="haka-tax auf LinkedIn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+    </a>
+      <a href="kontakt.html" class="cta-btn">Kontakt aufnehmen</a>
+      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    </div>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Kontakt</span>
+    <h1>Lassen Sie uns sprechen</h1>
+    <p>Schreiben Sie uns kurz, worum es geht — wir melden uns in der Regel innerhalb eines Werktags zurück.</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="form-grid">
+      <div>
+        <h2 class="section-title" style="font-size:22px;">Nachricht senden</h2>
+        <form onsubmit="return false;">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Ihr vollständiger Name" required>
+          </div>
+          <div class="field">
+            <label for="firma">Unternehmen (optional)</label>
+            <input type="text" id="firma" name="firma" placeholder="Ihr Unternehmen">
+          </div>
+          <div class="field">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" name="email" placeholder="ihre@email.de" required>
+          </div>
+          <div class="field">
+            <label for="telefon">Telefon (optional)</label>
+            <input type="tel" id="telefon" name="telefon" placeholder="Für Rückfragen">
+          </div>
+          <div class="field">
+            <label for="nachricht">Ihre Nachricht</label>
+            <textarea id="nachricht" name="nachricht" placeholder="Worum geht es?" required></textarea>
+          </div>
+          <div class="checkbox-row">
+            <input type="checkbox" id="privacy" required>
+            <label for="privacy" style="font-weight:400;margin:0;">Ich habe die Datenschutzerklärung gelesen und bin mit der Verarbeitung meiner Angaben einverstanden.</label>
+          </div>
+          <button type="submit" class="cta-btn" style="border:none;cursor:pointer;font-size:15px;padding:13px 24px;">Nachricht senden</button>
+        </form>
+      </div>
+
+      <div>
+        <div class="info-card">
+          <h3>haka-tax Steuerberatung</h3>
+          <a id="mapsLink" href="https://www.google.com/maps/search/?api=1&query=Schleifweg%2053%2C%2090409%20N%C3%BCrnberg" target="_blank" rel="noopener" class="line" style="text-decoration:underline;">Schleifweg 53, 90409 Nürnberg</a>
+          <div class="line">Tel. 0911 935 244-0</div>
+          <div class="line">hallo@haka-tax.de</div>
+          <div class="line">Mo–Do 8–17 Uhr, Fr 8–14 Uhr</div>
+          <p style="margin-top:22px;">Ein persönliches Gespräch sagt oft mehr als jede E-Mail — nach Ihrer Nachricht vereinbaren wir gern direkt einen Termin.</p>
+        </div>
+        <div class="photo-block" style="margin-top:20px;min-height:160px;">Foto: Büro-Eingang<br>(hier folgt echtes Bildmaterial)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="f-logo">haka-tax</div>
+      <p>Steuerberatung für den Mittelstand in Nürnberg — mit Fokus auf IT &amp; New Business, immaterielle Werte, Immobilien, Logistik und produzierende Industrie.</p>
+    </div>
+    <div>
+      <strong>Kontakt</strong>
+      <p>Schleifweg 53<br>90409 Nürnberg<br>0911 935 244-0<br>hallo@haka-tax.de</p>
+    </div>
+    <div>
+      <strong>Kanzlei</strong>
+      <p>HAKA Partnerschaft mbB Wirtschaftsprüfer Steuerberater<br>WP/StB Hechtel<br>WPin/StBin Albert<br>StBin Kemnitzer<br>StB Akkaya</p>
+    </div>
+  </div>
+  <div class="legal-bar">
+    <span>© 2026 haka-tax</span>
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="disclaimer.html">Disclaimer</a>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var toggle = document.querySelector('.nav-toggle');
+    var nav = document.querySelector('.main-nav');
+    if(toggle && nav){
+      toggle.addEventListener('click', function(){
+        var isOpen = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+      nav.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', function(){ nav.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+      });
+    }
+  })();
+
+  // Adresse: je nach Gerät zu Apple Maps oder Google Maps verlinken
+  (function(){
+    var link = document.getElementById('mapsLink');
+    if(!link) return;
+    var address = 'Schleifweg 53, 90409 Nürnberg';
+    var encoded = encodeURIComponent(address);
+    var isApple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) && !window.MSStream;
+    var url = isApple
+      ? ('https://maps.apple.com/?q=' + encoded)
+      : ('https://www.google.com/maps/search/?api=1&query=' + encoded);
+    link.setAttribute('href', url);
+  })();
+</script>
+</body>
+</html>
