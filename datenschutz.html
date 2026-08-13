@@ -16,6 +16,21 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23B9236B'/%3E%3Cg stroke='%23F7F7F8' stroke-width='3.2' stroke-linecap='round'%3E%3Cline x1='16' y1='7' x2='16' y2='25'/%3E%3Cline x1='8.2' y1='11.5' x2='23.8' y2='20.5'/%3E%3C/g%3E%3Cline x1='8.2' y1='20.5' x2='23.8' y2='11.5' stroke='%23FFC857' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E">
 <title>Datenschutz | haka-tax Steuerberatung</title>
 <style>
+/* Hausschrift: Inter (SIL Open Font License 1.1).
+   Schriftdateien liegen unter fonts/. Fallback: Segoe UI / system-ui.
+   Google Fonts nicht per <link> einbinden — das laedt die Schrift von
+   einem US-Server und ist einwilligungspflichtig. */
+@font-face{
+  font-family:'InterVar';
+  src:url('fonts/InterVariable.woff2') format('woff2');
+  font-weight:100 900; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'InterVar';
+  src:url('fonts/InterVariable-Italic.woff2') format('woff2');
+  font-weight:100 900; font-style:italic; font-display:swap;
+}
+
 :root{
   --white:#F7F7F8; --night:#1F1525; --raspberry:#B9236B; --violet:#58276B;
   --saffron:#ECA400; --honey:#FFC857; --mix:#D36436; --ink:#1F1525;
@@ -26,7 +41,7 @@
 html{scroll-behavior:smooth;}
 body{
   margin:0;background:var(--white);color:var(--ink);
-  font-family:'Aptos','Segoe UI','Inter',system-ui,-apple-system,sans-serif;
+  font-family:'InterVar','Inter','Segoe UI Variable Text','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
   -webkit-font-smoothing:antialiased;
 }
 a{color:inherit;text-decoration:none;}
@@ -402,6 +417,60 @@ footer ::-moz-selection,.transition-bar ::-moz-selection,.info-card ::-moz-selec
 .logo .mark{width:15px;height:15px;display:inline-block;flex-shrink:0;line-height:0;}
 .logo .mark svg{width:100%;height:100%;display:block;transition:transform .3s ease;}
 .logo:hover .mark svg{transform:rotate(90deg);}
+
+
+/* ================= Bildflächen ================= */
+.shot{position:relative;overflow:hidden;border-radius:18px;background:var(--bg-grad);}
+.shot img{width:100%;height:100%;object-fit:cover;display:block;
+  filter:saturate(1.04) contrast(1.03);}
+.shot.r43{aspect-ratio:4/3;} .shot.r32{aspect-ratio:3/2;}
+.shot.r11{aspect-ratio:1/1;} .shot.r21{aspect-ratio:21/9;} .shot.r169{aspect-ratio:16/9;}
+.shot-cap{font-size:12.5px;color:#8a7a86;margin-top:10px;line-height:1.5;}
+/* Regieanweisung für das Fotoshooting.
+   NACH DEM SHOOTING: .motiv{display:none;} setzen oder Zeile entfernen. */
+.motiv{position:absolute;left:12px;top:12px;z-index:2;
+  background:rgba(31,21,37,.84);color:#F7F7F8;font-size:11px;line-height:1.4;
+  letter-spacing:.02em;padding:5px 9px;border-radius:7px;max-width:calc(100% - 24px);}
+.card-shot{border-radius:16px 16px 0 0;margin:-26px -26px 18px;}
+.legal-shot{max-width:760px;margin:0 auto;padding:34px 24px 0;}
+
+/* Bildkacheln in den Branchen-Karten */
+.card.has-shot{padding-top:0;overflow:hidden;}
+.card.has-shot .inner{padding:22px 0 0;}
+
+
+/* Partner-Porträts: gleiche Kachelform, Verlauf nur noch als Hintergrund */
+.avatar-shot{position:relative;padding:0;overflow:hidden;}
+.avatar-shot img{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* ===== Wortmarke: reiner Text, Signet davor ===== */
+.wm{font-weight:700;letter-spacing:-0.015em;}
+.logo{gap:8px;align-items:center;}
+.logo .mark{width:17px;height:17px;display:inline-block;line-height:0;flex-shrink:0;}
+.logo .mark svg{width:100%;height:100%;display:block;transition:transform .3s ease;}
+.logo:hover .mark svg{transform:rotate(90deg);}
+footer .f-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:20px;margin-bottom:12px;}
+footer .f-logo .mark{width:16px;height:16px;display:inline-block;line-height:0;flex-shrink:0;}
+footer .f-logo .mark svg{width:100%;height:100%;display:block;}
+
+/* ===== Regieanweisung: dezenter, verdeckt das Bild nicht ===== */
+.motiv{
+  position:absolute;left:0;right:0;bottom:0;top:auto;z-index:2;
+  background:linear-gradient(to top,rgba(31,21,37,.86),rgba(31,21,37,0));
+  color:#F7F7F8;font-size:10.5px;line-height:1.35;letter-spacing:.01em;
+  padding:22px 10px 7px;border-radius:0;max-width:none;font-weight:600;
+}
+.avatar-shot .motiv{font-size:9.5px;padding:16px 8px 6px;}
+/* NACH DEM FOTOSHOOTING: nächste Zeile aktivieren, dann verschwinden alle Etiketten.
+   .motiv{display:none;} */
+
+/* ===== Abstand zwischen Button und Bild ===== */
+.hero-cta + .shot{margin-top:34px;}
+.section-lead + .shot{margin-top:26px;}
+
+/* ===== Bildergalerie am Seitenende ===== */
+.shot-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media (max-width:820px){ .shot-row{grid-template-columns:1fr;} }
 </style>
 </head>
 <body>
@@ -414,7 +483,7 @@ footer ::-moz-selection,.transition-bar ::-moz-selection,.info-card ::-moz-selec
 
 <header>
   <div class="nav-inner">
-    <a href="index.html" class="logo">haka-tax<span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round"><line x1="12" y1="4" x2="12" y2="20" stroke="#B9236B" stroke-width="2.6"/><line x1="5.07" y1="8" x2="18.93" y2="16" stroke="#B9236B" stroke-width="2.6"/><line x1="5.07" y1="16" x2="18.93" y2="8" stroke="#ECA400" stroke-width="2.6"/></svg></span></a>
+    <a href="index.html" class="logo"><span class="mark" aria-hidden="true"><svg viewBox="0 0 120 120" fill="none"><g stroke="#B9236B" stroke-width="9.5"><line x1="62.1" y1="50.2" x2="69.6" y2="15"/><line x1="69.9" y1="61.4" x2="99.6" y2="65.6"/><line x1="57.6" y1="69.7" x2="51.8" y2="93"/></g><line x1="50.9" y1="55.8" x2="11.1" y2="37.2" stroke="#ECA400" stroke-width="9.5"/></svg></span><span class="wm">haka-tax</span></a>
     <nav class="main-nav">
       <a href="index.html">Start</a>
       <a href="leistungen.html">Leistungen</a>
@@ -448,30 +517,33 @@ footer ::-moz-selection,.transition-bar ::-moz-selection,.info-card ::-moz-selec
   HAKA Partnerschaft mbB Wirtschaftsprüfer Steuerberater, Schleifweg 53, 90409 Nürnberg<br>
   E-Mail: hallo@haka-tax.de, Telefon: 0911 935 244-0</p>
 
-  Geschäftsführung: WP/StB Roland Hechtel, WPin/StBin Stephanie Albert, StBin Christina Kemnitzer und StB Faruk Akkaya</p>
+  Vertretungsberechtigte Partner: WP/StB Roland Hechtel, WPin/StBin Stephanie Albert, StBin Christina Kemnitzer und StB Faruk Akkaya</p>
 
   <h2>2. Erhebung und Speicherung personenbezogener Daten</h2>
   <p>Beim Besuch unserer Website erhebt unser Hosting-Anbieter automatisch Informationen in Server-Logfiles, die Ihr Browser übermittelt (u. a. IP-Adresse, Datum und Uhrzeit der Anfrage, Browsertyp, verwendetes Betriebssystem). Diese Daten sind technisch erforderlich, um die Website auszuliefern, und werden nicht mit anderen Datenquellen zusammengeführt.</p>
 
-  <h2>3. Kontaktformular</h2>
+  <h2>3. Hosting</h2>
+      <p>[Diese Angabe an das tatsächliche Hosting anpassen.] Die Website wird bei [Anbieter, Anschrift] gehostet. Dabei werden die unter Ziffer 2 genannten Daten verarbeitet. Sofern der Anbieter seinen Sitz außerhalb der Europäischen Union hat, erfolgt die Übermittlung auf Grundlage von Art. 44 ff. DSGVO; wir haben mit dem Anbieter die erforderlichen Vereinbarungen geschlossen.</p>
+
+      <h2>4. Kontaktformular</h2>
   <p>Wenn Sie uns über das Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Formular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Beantwortung von Anfragen).</p>
 
-  <h2>4. Mandatsbezogene Datenverarbeitung</h2>
+  <h2>5. Mandatsbezogene Datenverarbeitung</h2>
   <p>Im Rahmen der steuerlichen Beratung verarbeiten wir personenbezogene und wirtschaftliche Daten unserer Mandantinnen und Mandanten, soweit dies zur Erfüllung des Mandatsverhältnisses erforderlich ist. Rechtsgrundlage sind Art. 6 Abs. 1 lit. b und lit. c DSGVO in Verbindung mit den berufsrechtlichen Aufbewahrungspflichten (u. a. § 66 StBerG, § 147 AO).</p>
 
-  <h2>5. Cookies</h2>
+  <h2>6. Cookies</h2>
   <p>Diese Website verwendet, sofern technisch nicht zwingend erforderlich, keine Cookies zu Analyse- oder Marketingzwecken ohne Ihre vorherige Einwilligung.</p>
 
-  <h2>6. Weitergabe von Daten</h2>
+  <h2>7. Weitergabe von Daten</h2>
   <p>Eine Übermittlung Ihrer Daten an Dritte erfolgt nur, soweit dies gesetzlich vorgeschrieben ist, Sie eingewilligt haben, oder dies zur Durchführung des Mandatsverhältnisses erforderlich ist (z. B. an Finanzbehörden im Rahmen der Mandatsbearbeitung).</p>
 
-  <h2>7. Speicherdauer</h2>
+  <h2>8. Speicherdauer</h2>
   <p>Personenbezogene Daten aus Kontaktanfragen werden gelöscht, sobald sie für die Bearbeitung nicht mehr erforderlich sind. Mandatsbezogene Unterlagen unterliegen den gesetzlichen Aufbewahrungsfristen (in der Regel 10 Jahre gemäß § 147 AO / § 66 StBerG).</p>
 
-  <h2>8. Ihre Rechte</h2>
+  <h2>9. Ihre Rechte</h2>
   <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen die Verarbeitung Ihrer personenbezogenen Daten. Wenden Sie sich hierzu an die oben genannte Kontaktadresse. Ihnen steht zudem ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu, in Bayern: Bayerisches Landesamt für Datenschutzaufsicht (BayLDA).</p>
 
-  <h2>9. Änderung dieser Datenschutzerklärung</h2>
+  <h2>10. Änderung dieser Datenschutzerklärung</h2>
   <p>Wir passen diese Datenschutzerklärung an, sobald Änderungen der Datenverarbeitung dies erforderlich machen. Es gilt jeweils die aktuell auf dieser Seite veröffentlichte Fassung.</p>
 
   <p class="source-note"> </p>
@@ -481,7 +553,7 @@ footer ::-moz-selection,.transition-bar ::-moz-selection,.info-card ::-moz-selec
 <footer>
   <div class="footer-inner">
     <div>
-      <div class="f-logo">haka-tax</div>
+      <div class="f-logo"><span class="mark" aria-hidden="true"><svg viewBox="0 0 120 120" fill="none"><g stroke="#F7F7F8" stroke-width="9.5"><line x1="62.1" y1="50.2" x2="69.6" y2="15"/><line x1="69.9" y1="61.4" x2="99.6" y2="65.6"/><line x1="57.6" y1="69.7" x2="51.8" y2="93"/></g><line x1="50.9" y1="55.8" x2="11.1" y2="37.2" stroke="#ECA400" stroke-width="9.5"/></svg></span><span class="wm">haka-tax</span></div>
       <p>Steuerberatung für den Mittelstand in Nürnberg. Schwerpunkte: Logistik &amp; Spedition, produzierende Industrie, IT &amp; New Business, immaterielle Werte und Immobilien.</p>
     </div>
     <div>
