@@ -21,12 +21,21 @@
 /* ---------- Breakpoint-Konvention ----------
    CSS-Variablen funktionieren nicht in @media-Bedingungen, daher hier nur
    als Dokumentation: strukturelle Layoutwechsel (Nav/Footer/Grids) nutzen
-   ausschließlich diese drei Stufen, statt wie zuvor 8 verschiedener Werte.
+   ausschließlich diese vier Stufen, statt wie zuvor 8 verschiedener Werte.
      560px  – kleine Grids/Listen auf 1 Spalte
-     768px  – Header-Nav und Footer klappen um
+     768px  – Footer klappt um
      960px  – große Content-Grids klappen um
+     1140px – Header-Nav klappt ins Mobil-Menü um
+   Header-Nav bekam einen eigenen, höheren Wert: seit Darkmode-Umschalter
+   und Sprachwahl dazukamen, passen Logo + 6 Nav-Punkte + 4 Header-Buttons
+   erst ab ~1140px nebeneinander (knapp über .nav-inners max-width:1120px,
+   damit nie eine Quetschzone entsteht, in der Logo/Buttons umbrechen).
    Rein kosmetische Feinjustierungen (z. B. Schriftgröße im Banner) bleiben
-   davon unberührt und stehen an ihrer jeweiligen Stelle. */
+   davon unberührt und stehen an ihrer jeweiligen Stelle.
+   Zusätzliche, punktuelle Stufe unterhalb der kleinsten Grid-Stufe:
+     380px  – Header-Icon-Cluster (LinkedIn/Sprache/Darkmode/Menü) wird
+              knapper, da vier Icon-Buttons + Logo auf sehr schmalen
+              Phones (ab 320px) sonst über den Viewport-Rand hinausragen. */
 
 :root{
   --white:#F7F7F8; --night:#1F1525; --raspberry:#B9236B; --violet:#58276B;
@@ -59,6 +68,13 @@
   --accent-2:#58276B;
   --highlight-bg:#FFF3D6;
   --highlight-text:#7a5a1a;
+
+  /* Durchgehende Hintergrund-Atmosphäre der ganzen Seite (siehe body::before) —
+     ersetzt die frühere Section-für-Section-Tönung (.section-alt), damit keine
+     Kanten an Section-Grenzen mehr entstehen. */
+  --atmosphere:
+    radial-gradient(60% 50% at 15% 8%, rgba(185,35,107,.05), transparent 65%),
+    radial-gradient(55% 45% at 88% 52%, rgba(88,39,107,.05), transparent 65%);
 }
 
 @media (prefers-color-scheme: dark){
@@ -82,6 +98,9 @@
     --accent-2:#B98CE0;
     --highlight-bg:#4A3B1A;
     --highlight-text:#F5D98C;
+    --atmosphere:
+      radial-gradient(60% 50% at 15% 8%, rgba(185,35,107,.1), transparent 65%),
+      radial-gradient(55% 45% at 88% 52%, rgba(88,39,107,.1), transparent 65%);
   }
 }
 :root[data-theme="dark"]{
@@ -104,6 +123,9 @@
   --accent-2:#B98CE0;
   --highlight-bg:#4A3B1A;
   --highlight-text:#F5D98C;
+  --atmosphere:
+    radial-gradient(60% 50% at 15% 8%, rgba(185,35,107,.1), transparent 65%),
+    radial-gradient(55% 45% at 88% 52%, rgba(88,39,107,.1), transparent 65%);
 }
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;height:100%;}
@@ -112,16 +134,47 @@ body{
   font-family:'InterVar','Inter','Segoe UI Variable Text','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
   -webkit-font-smoothing:antialiased;
   display:flex;flex-direction:column;min-height:100vh;
+  position:relative;
+  overflow-wrap:break-word;
   transition:background-color .2s ease, color .2s ease;
+}
+/* body ist seit dem Sticky-Footer-Fix ein Flex-Container; Flex-Items haben
+   per Default min-width:auto (= Inhalt darf nie schmaler werden als sein
+   längstes unbrechbares Wort). Bei sehr schmalen Phones (320px) reißt ein
+   einzelnes langes deutsches Kompositum (z. B. "Berufshaftpflichtversicherung"
+   in den Rechtstexten) dadurch die ganze Seite in die Breite. min-width:0
+   schaltet die automatische Mindestbreite ab; width:100% erzwingt zusätzlich
+   verlässlich die volle Breite (Chromiums "stretch"-Auflösung von width:auto
+   ist in Kombination mit sehr langen Wörtern unzuverlässig) — beides
+   zusammen mit overflow-wrap oben sorgt dafür, dass ein zu langes Wort
+   sauber umbricht statt die Seite zu sprengen. */
+body > *{min-width:0;width:100%;}
+/* Eine einzige, durchgehende Hintergrund-Atmosphäre für die ganze Seite statt
+   einzelner Section-Hintergründe — dadurch entstehen keine Kanten mehr an
+   Section-Grenzen, und die Glass-Kacheln (backdrop-filter:blur) bekommen
+   endlich echte Struktur zum Durchscheinen. Auf Desktop fix (steht beim
+   Scrollen still, "nahtet" also nie), auf Mobil/Tablet mit der Seite
+   scrollend (background-attachment:fixed ruckelt auf mobilem Safari). */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:var(--atmosphere);
+}
+@media (max-width:1023px){
+  body::before{position:absolute;}
 }
 a{color:inherit;text-decoration:none;}
 img{max-width:100%;display:block;}
 .container{max-width:1120px;margin:0 auto;padding:0 24px;}
 
 /* Header */
-header{position:sticky;top:0;background:var(--surface-glass-strong);-webkit-backdrop-filter:blur(12px) saturate(1.1);backdrop-filter:blur(12px) saturate(1.1);box-shadow:inset 0 -1px 0 rgba(31,21,37,.07);z-index:50;}
+header{position:sticky;top:0;background:var(--surface-glass-strong);-webkit-backdrop-filter:blur(12px) saturate(1.1);backdrop-filter:blur(12px) saturate(1.1);box-shadow:inset 0 -1px 0 rgba(31,21,37,.07);z-index:50;transition:box-shadow .25s ease;}
+header.scrolled{box-shadow:inset 0 -1px 0 rgba(31,21,37,.07), 0 8px 24px rgba(31,21,37,.12);}
 .nav-inner{max-width:1120px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
-.logo{font-weight:700;font-size:20px;display:flex;align-items:center;gap:6px;letter-spacing:-0.01em;}
+.logo{font-weight:700;font-size:20px;display:flex;align-items:center;gap:6px;letter-spacing:-0.01em;flex-shrink:0;}
 .logo .dot{width:8px;height:8px;border-radius:2.5px;background:var(--y-grad);display:inline-block;}
 nav.main-nav{display:flex;gap:28px;font-size:14.5px;font-weight:600;}
 nav.main-nav a{opacity:.75;transition:opacity .15s;}
@@ -152,10 +205,10 @@ nav.main-nav a:hover,nav.main-nav a.active{opacity:1;}
   :root:not([data-theme="light"]) .theme-toggle .icon-sun{display:block;}
 }
 .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--text);flex-shrink:0;}
-@media (max-width:768px){
+@media (max-width:1140px){
   header{position:sticky;}
   nav.main-nav{
-    display:none;
+    display:flex;
     position:absolute;
     top:100%;left:0;right:0;
     background:var(--surface-glass-strong);
@@ -163,16 +216,35 @@ nav.main-nav a:hover,nav.main-nav a.active{opacity:1;}
     backdrop-filter:blur(16px) saturate(1.1);
     flex-direction:column;
     gap:2px;
-    padding:10px 24px 18px;
+    padding:0 24px;
     border-bottom:1px solid var(--border);
     box-shadow:0 16px 32px rgba(31,21,37,.1);
+    max-height:0;
+    opacity:0;
+    overflow:hidden;
+    pointer-events:none;
+    transform:translateY(-6px);
+    transition:max-height .3s ease, opacity .25s ease, transform .25s ease, padding .3s ease;
   }
-  nav.main-nav.open{display:flex;}
+  nav.main-nav.open{
+    max-height:520px;
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0);
+    padding:10px 24px 18px;
+  }
   nav.main-nav a{padding:12px 4px;font-size:15.5px;border-bottom:1px solid var(--border-faint);opacity:1;}
   .nav-toggle{display:flex;align-items:center;justify-content:center;}
 }
 @media (max-width:520px){
   .header-actions .cta-btn{display:none;}
+}
+@media (max-width:380px){
+  .nav-inner{padding-left:16px;padding-right:16px;gap:16px;}
+  .header-actions{gap:8px;}
+  .social-btn,.theme-toggle{width:34px;height:34px;}
+  .lang-switch{padding:0 9px;}
+  .nav-toggle{padding:6px;}
 }
 
 /* "Rechtliches"-Dropdown im Hauptmenü — natives <details>/<summary>, kein JS nötig */
@@ -195,7 +267,7 @@ nav.main-nav a:hover,nav.main-nav a.active{opacity:1;}
 .nav-legal-panel a::after{display:none;}
 .nav-legal-panel a:hover{background:var(--surface-alt);}
 .nav-legal-panel a.active{font-weight:700;}
-@media (max-width:768px){
+@media (max-width:1140px){
   .nav-legal{width:100%;}
   .nav-legal summary{padding:12px 4px;font-size:15.5px;border-bottom:1px solid var(--border-faint);opacity:1;}
   .nav-legal-panel{position:static;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border:none;box-shadow:none;padding:0 0 0 14px;margin-top:0;}
@@ -224,14 +296,37 @@ nav.main-nav a:hover,nav.main-nav a.active{opacity:1;}
 .hero .lead{font-size:17.5px;line-height:1.6;opacity:.92;margin:0 0 32px;max-width:560px;}
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
 
-/* Page hero (Unterseiten) */
+/* Page hero (Unterseiten) — trägt jetzt dieselbe Glass-Panel-Sprache wie
+   die Startseite (siehe .hero-panel.compact unten), für ein einheitliches
+   Bild über die ganze Seite hinweg. */
 .page-hero{background:var(--bg-grad);padding:70px 24px 56px;color:var(--white);}
 .page-hero h1{font-size:clamp(28px,3.6vw,40px);margin:12px 0 10px;font-weight:700;letter-spacing:-0.01em;}
 .page-hero p{font-size:16px;max-width:560px;opacity:.92;line-height:1.55;margin:0;}
 
+/* Kompaktere Hero-Variante für die 3 Rechtsseiten (ersetzt bisherige
+   Inline-Style-Overrides auf padding/h1-Größe) */
+.page-hero.compact-hero{padding:56px 24px 40px;}
+.page-hero.compact-hero h1{font-size:28px;}
+
+/* Kleinere Glass-Panel-Größe für Unterseiten-Heros — gleiches "Material"
+   wie .hero-panel (Hintergrund/Blur/Rand/Schatten), nur kompakter. */
+.hero-panel.compact{padding:32px 28px;}
+
+/* Auf sehr schmalen Phones summiert sich das horizontale Panel-Padding
+   sonst mit dem Padding von .hero/.page-hero und .container (jeweils
+   24px) — bis zu 88px Einzug pro Seite. Hier reduziert, damit auf
+   320-375px-Screens genug Platz für den Fließtext bleibt. */
+@media (max-width:560px){
+  .hero-panel,.hero-panel.compact{padding:32px 24px;}
+}
+
 section{padding:68px 24px;}
 .section-tight{padding:52px 24px;}
-.section-alt{background:var(--surface-alt);}
+/* .section-alt malt keinen eigenen Hintergrund mehr — die Seite hat
+   stattdessen eine einzige durchgehende Hintergrund-Atmosphäre (siehe
+   body::before weiter unten), damit an Section-Grenzen keine Kanten mehr
+   entstehen. Klasse bleibt im Markup bestehen, ist aber ein No-Op. */
+.section-alt{}
 @media (max-width:640px){
   section{padding:48px 20px;}
   .section-tight{padding:40px 20px;}
@@ -284,13 +379,19 @@ section .container p.section-lead:last-child{margin-bottom:0;}
 .photo-block{background:var(--bg-grad);border-radius:18px;min-height:220px;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:13px;font-weight:600;opacity:.9;text-align:center;padding:20px;}
 
 /* CTA band */
-.cta-band{background:var(--night);color:var(--white);padding:72px 24px;text-align:center;}
+.cta-band{background:var(--night);color:var(--white);padding:72px 24px;text-align:center;position:relative;overflow:hidden;}
+.cta-band::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:130px;
+  background:linear-gradient(to bottom, rgba(185,35,107,.1), transparent);
+  pointer-events:none;
+}
 .cta-band h2{font-size:clamp(22px,3vw,30px);margin:0 0 18px;font-weight:700;}
 .cta-band .cta-btn{margin-top:6px;}
 
 /* Contact form */
 .form-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;}
 @media (max-width:960px){ .form-grid{grid-template-columns:1fr;} }
+@media (max-width:640px){ .form-grid{gap:32px;} }
 form label{display:block;font-size:13px;font-weight:700;margin:0 0 6px;color:var(--text);}
 form .field{margin-bottom:18px;}
 form input,form textarea{
@@ -312,6 +413,7 @@ form textarea{min-height:120px;resize:vertical;}
 .info-card .info-subtitle{margin:0 0 16px;font-size:13px;opacity:.85;}
 .info-card p{font-size:14px;line-height:1.7;opacity:.95;margin:0 0 18px;}
 .info-card .line{display:flex;gap:10px;font-size:14px;margin-bottom:10px;opacity:.95;}
+@media (max-width:560px){ .info-card{padding:22px 20px;} }
 
 /* Footer */
 footer{background:var(--night);color:var(--white);padding:56px 24px 0;margin-top:auto;}
@@ -337,6 +439,8 @@ footer{background:var(--night);color:var(--white);padding:56px 24px 0;margin-top
 .legal-content p, .legal-content li{font-size:14.5px;line-height:1.7;color:var(--text-deep);margin:0 0 12px;}
 .legal-content ul{padding-left:20px;}
 .legal-content .fill{background:var(--highlight-bg);padding:1px 6px;border-radius:4px;color:var(--highlight-text);font-weight:600;}
+.lang-notice{color:var(--text-muted);font-style:italic;font-size:13.5px;line-height:1.6;border-left:2px solid var(--border-card);padding-left:14px;margin:0 0 28px;}
+.lang-notice a{color:var(--accent);text-decoration:underline;font-style:normal;}
 
 /* ---------- Textmarkierung im Corporate Design ---------- */
 ::selection{background:var(--accent);color:var(--white);}
@@ -415,7 +519,7 @@ nav.main-nav a::after{
   transform:scaleX(0);transform-origin:left;transition:transform .25s ease;
 }
 nav.main-nav a:hover::after,nav.main-nav a.active::after{transform:scaleX(1);}
-@media (max-width:768px){ nav.main-nav a::after{display:none;} }
+@media (max-width:1140px){ nav.main-nav a::after{display:none;} }
 
 /* Logo-Akzent */
 .logo .dot{transition:transform .25s ease;}
@@ -424,7 +528,7 @@ nav.main-nav a:hover::after,nav.main-nav a.active::after{transform:scaleX(1);}
 .logo .mark svg{width:100%;height:100%;display:block;transition:transform .3s ease;}
 .logo:hover .mark svg{transform:rotate(90deg);}
 .logo{gap:8px;align-items:center;}
-.wm{font-weight:700;letter-spacing:-0.015em;}
+.wm{font-weight:700;letter-spacing:-0.015em;white-space:nowrap;}
 footer .f-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:20px;margin-bottom:12px;}
 footer .f-logo .mark{width:16px;height:16px;display:inline-block;line-height:0;flex-shrink:0;}
 footer .f-logo .mark svg{width:100%;height:100%;display:block;}
@@ -461,17 +565,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
   margin:0 0 18px;
 }
 
-/* Weiche Haarlinie als Abschnittstrenner (durchgehender Hintergrund) */
-section + section{position:relative;}
-section + section::before{
-  content:"";position:absolute;left:24px;right:24px;top:0;height:1px;
-  background:linear-gradient(to right,
-    transparent,
-    rgba(185,35,107,.34) 20%,
-    rgba(88,39,107,.24) 70%,
-    transparent);
-}
-@media (max-width:640px){ section + section::before{left:20px;right:20px;} }
 
 /* Kacheln: Verlaufslinie beim Überfahren */
 .card::before,.value-card::before,.perk::before,.job-card::before{
