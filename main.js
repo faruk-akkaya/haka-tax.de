@@ -12,6 +12,17 @@
   }
 })();
 
+// Header bekommt einen etwas kräftigeren Schatten, sobald über den
+// Hero hinausgescrollt wurde — dezenter "App-Gefühl"-Hinweis, dass die
+// Seite gescrollt ist, ohne die Darstellung sonst zu verändern.
+(function(){
+  var header = document.querySelector('header');
+  if(!header) return;
+  var sync = function(){ header.classList.toggle('scrolled', window.scrollY > 40); };
+  sync();
+  window.addEventListener('scroll', sync, { passive: true });
+})();
+
 // Darkmode: manueller Umschalter im Header. Ohne gespeicherte Wahl folgt die
 // Seite der Systemeinstellung (per CSS @media prefers-color-scheme); das
 // blockierende Inline-Script im <head> setzt data-theme bereits vor dem
