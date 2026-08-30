@@ -1,0 +1,22 @@
+{
+  "name": "haka-tax.de",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faruk-akkaya/haka-tax.de.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/faruk-akkaya/haka-tax.de/issues"
+  },
+  "homepage": "https://github.com/faruk-akkaya/haka-tax.de#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.4.0"
+  }
+}
