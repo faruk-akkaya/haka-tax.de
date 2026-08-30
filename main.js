@@ -12,6 +12,31 @@
   }
 })();
 
+// Darkmode: manueller Umschalter im Header. Ohne gespeicherte Wahl folgt die
+// Seite der Systemeinstellung (per CSS @media prefers-color-scheme); das
+// blockierende Inline-Script im <head> setzt data-theme bereits vor dem
+// ersten Rendern, dieses Skript übernimmt nur noch Klick-Handling und Icon.
+(function(){
+  var btn = document.querySelector('.theme-toggle');
+  if(!btn) return;
+  var root = document.documentElement;
+  function isDark(){
+    var stored = root.dataset.theme;
+    if(stored) return stored === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function syncPressed(){
+    btn.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+  }
+  syncPressed();
+  btn.addEventListener('click', function(){
+    var next = isDark() ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try{ localStorage.setItem('haka-theme', next); }catch(e){}
+    syncPressed();
+  });
+})();
+
 // Adresse: je nach Gerät zu Apple Maps oder Google Maps verlinken
 (function(){
   var link = document.getElementById('mapsLink');
@@ -51,6 +76,16 @@
   var form = document.getElementById('contactForm');
   if(!form) return;
   var note = document.getElementById('contactFormNote');
+  var isEn = document.documentElement.lang === 'en';
+  var t = isEn ? {
+    subject: 'Contact request from ',
+    name: 'Name: ', company: 'Company: ', email: 'Email: ', phone: 'Phone: ',
+    note: 'Your email program will open with a pre-filled message — please send it from there. If nothing opens, please email us directly at hallo@haka-tax.de.'
+  } : {
+    subject: 'Kontaktanfrage von ',
+    name: 'Name: ', company: 'Unternehmen: ', email: 'E-Mail: ', phone: 'Telefon: ',
+    note: 'Ihr E-Mail-Programm öffnet sich mit einer vorausgefüllten Nachricht — bitte senden Sie die E-Mail dort ab. Falls sich nichts öffnet, schreiben Sie uns direkt an hallo@haka-tax.de.'
+  };
   form.addEventListener('submit', function(event){
     event.preventDefault();
     if(!form.reportValidity()) return;
@@ -65,13 +100,13 @@
       nachricht,
       '',
       '—',
-      'Name: ' + name,
-      firma ? ('Unternehmen: ' + firma) : null,
-      'E-Mail: ' + email,
-      telefon ? ('Telefon: ' + telefon) : null
+      t.name + name,
+      firma ? (t.company + firma) : null,
+      t.email + email,
+      telefon ? (t.phone + telefon) : null
     ].filter(function(line){ return line !== null; });
 
-    var subject = 'Kontaktanfrage von ' + name;
+    var subject = t.subject + name;
     var mailto = 'mailto:hallo@haka-tax.de'
       + '?subject=' + encodeURIComponent(subject)
       + '&body=' + encodeURIComponent(bodyLines.join('\n'));
@@ -79,7 +114,7 @@
     window.location.href = mailto;
 
     if(note){
-      note.textContent = 'Ihr E-Mail-Programm öffnet sich mit einer vorausgefüllten Nachricht — bitte senden Sie die E-Mail dort ab. Falls sich nichts öffnet, schreiben Sie uns direkt an hallo@haka-tax.de.';
+      note.textContent = t.note;
       note.hidden = false;
     }
   });
