@@ -40,6 +40,7 @@
 :root{
   --white:#F7F7F8; --night:#1F1525; --raspberry:#B9236B; --violet:#58276B;
   --saffron:#ECA400; --honey:#FFC857; --mix:#D36436; --ink:#1F1525;
+  --mauve:#86747F;
   --bg-grad: linear-gradient(to left, var(--raspberry) 0%, var(--raspberry) 62%, var(--violet) 100%);
   --y-grad: linear-gradient(to left, var(--saffron), var(--honey));
 
