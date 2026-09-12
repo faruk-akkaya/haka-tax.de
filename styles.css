@@ -38,11 +38,10 @@
               Phones (ab 320px) sonst über den Viewport-Rand hinausragen. */
 
 :root{
-  --white:#F7F7F8; --night:#1F1525; --raspberry:#B9236B; --violet:#58276B;
-  --saffron:#ECA400; --honey:#FFC857; --mix:#D36436; --ink:#1F1525;
-  --mauve:#86747F;
-  --bg-grad: linear-gradient(to left, var(--raspberry) 0%, var(--raspberry) 62%, var(--violet) 100%);
-  --y-grad: linear-gradient(to left, var(--saffron), var(--honey));
+  --white:#F7F7F8; --night:#1F1525; --gold:#C9A227; --sand:#D9BE7A;
+  --senf:#A9822E; --bordeaux:#6E1F3A; --bordeaux-deep:#50162A; --mix:#D36436; --ink:#1F1525;
+  --bg-grad: linear-gradient(to left, var(--bordeaux-deep) 0%, var(--bordeaux-deep) 62%, var(--bordeaux) 100%);
+  --y-grad: linear-gradient(to left, var(--senf), var(--sand));
 
   /* Konsolidierte Graustufen (ersetzen ~8 vorher ad hoc verstreute Werte) */
   --border-faint:#F4F2F4;
@@ -55,18 +54,18 @@
   --text-deep:#3a2c37;
 
   /* Semantische Theme-Tokens: passen sich im Darkmode an (siehe unten).
-     --raspberry/--violet/--saffron/--honey/--bg-grad/--y-grad/--white/--night/--ink
+     --gold/--sand/--senf/--bordeaux/--bg-grad/--y-grad/--white/--night/--ink
      bleiben feste Markenfarben und ändern sich NICHT zwischen den Themes —
      sie tragen Hero/CTA-Band/Footer/Buttons, die in beiden Modi gleich aussehen sollen. */
   --bg:#F7F7F8;
   --surface:#FFFFFF;
-  --surface-alt:linear-gradient(135deg, rgba(185,35,107,.045), rgba(88,39,107,.045));
+  --surface-alt:linear-gradient(135deg, rgba(201,162,39,.045), rgba(110,31,58,.045));
   --surface-glass:rgba(255,255,255,.78);
   --surface-glass-strong:rgba(255,255,255,.9);
   --glass-hairline:rgba(255,255,255,.6);
   --text:#1F1525;
-  --accent:#B9236B;
-  --accent-2:#58276B;
+  --accent:#6E1F3A;
+  --accent-2:#6E1F3A;
   --highlight-bg:#FFF3D6;
   --highlight-text:#7a5a1a;
 
@@ -74,15 +73,15 @@
      ersetzt die frühere Section-für-Section-Tönung (.section-alt), damit keine
      Kanten an Section-Grenzen mehr entstehen. */
   --atmosphere:
-    radial-gradient(60% 50% at 15% 8%, rgba(185,35,107,.05), transparent 65%),
-    radial-gradient(55% 45% at 88% 52%, rgba(88,39,107,.05), transparent 65%);
+    radial-gradient(60% 50% at 15% 8%, rgba(201,162,39,.05), transparent 65%),
+    radial-gradient(55% 45% at 88% 52%, rgba(110,31,58,.05), transparent 65%);
 }
 
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#17111C;
     --surface:#241A2B;
-    --surface-alt:linear-gradient(135deg, rgba(185,35,107,.09), rgba(88,39,107,.09));
+    --surface-alt:linear-gradient(135deg, rgba(201,162,39,.09), rgba(110,31,58,.09));
     --surface-glass:rgba(36,26,43,.62);
     --surface-glass-strong:rgba(23,17,28,.82);
     --glass-hairline:rgba(255,255,255,.08);
@@ -95,19 +94,19 @@
     --text-muted:#A99CA5;
     --text-body:#C9BDC6;
     --text-deep:#E4DCE2;
-    --accent:#F0508A;
-    --accent-2:#B98CE0;
+    --accent:#D87496;
+    --accent-2:#D87496;
     --highlight-bg:#4A3B1A;
     --highlight-text:#F5D98C;
     --atmosphere:
-      radial-gradient(60% 50% at 15% 8%, rgba(185,35,107,.1), transparent 65%),
-      radial-gradient(55% 45% at 88% 52%, rgba(88,39,107,.1), transparent 65%);
+      radial-gradient(60% 50% at 15% 8%, rgba(201,162,39,.1), transparent 65%),
+      radial-gradient(55% 45% at 88% 52%, rgba(110,31,58,.1), transparent 65%);
   }
 }
 :root[data-theme="dark"]{
   --bg:#17111C;
   --surface:#241A2B;
-  --surface-alt:linear-gradient(135deg, rgba(185,35,107,.09), rgba(88,39,107,.09));
+  --surface-alt:linear-gradient(135deg, rgba(201,162,39,.09), rgba(110,31,58,.09));
   --surface-glass:rgba(36,26,43,.62);
   --surface-glass-strong:rgba(23,17,28,.82);
   --glass-hairline:rgba(255,255,255,.08);
@@ -120,13 +119,13 @@
   --text-muted:#A99CA5;
   --text-body:#C9BDC6;
   --text-deep:#E4DCE2;
-  --accent:#F0508A;
-  --accent-2:#B98CE0;
+  --accent:#D87496;
+  --accent-2:#D87496;
   --highlight-bg:#4A3B1A;
   --highlight-text:#F5D98C;
   --atmosphere:
-    radial-gradient(60% 50% at 15% 8%, rgba(185,35,107,.1), transparent 65%),
-    radial-gradient(55% 45% at 88% 52%, rgba(88,39,107,.1), transparent 65%);
+    radial-gradient(60% 50% at 15% 8%, rgba(201,162,39,.1), transparent 65%),
+    radial-gradient(55% 45% at 88% 52%, rgba(110,31,58,.1), transparent 65%);
 }
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;height:100%;}
@@ -183,7 +182,7 @@ nav.main-nav a:hover,nav.main-nav a.active{opacity:1;}
 .cta-btn{background:var(--bg-grad);color:var(--white);padding:11px 20px;border-radius:10px;font-size:14px;font-weight:700;white-space:normal;text-align:center;display:inline-block;}
 .cta-btn.ghost{background:transparent;border:1.5px solid var(--text);color:var(--text);}
 .cta-btn.ghost.on-dark{color:var(--white);border-color:rgba(247,247,248,.5);}
-.cta-btn.light{background:var(--white);color:var(--violet);}
+.cta-btn.light{background:var(--white);color:var(--bordeaux);}
 .cta-btn.accent{background:var(--y-grad);color:var(--ink);}
 .header-actions{display:flex;align-items:center;gap:12px;}
 .social-btn{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--surface);border:1.5px solid var(--border);color:var(--text);transition:border-color .15s,color .15s;flex-shrink:0;}
@@ -383,7 +382,7 @@ section .container p.section-lead:last-child{margin-bottom:0;}
 .cta-band{background:var(--night);color:var(--white);padding:72px 24px;text-align:center;position:relative;overflow:hidden;}
 .cta-band::before{
   content:"";position:absolute;left:0;right:0;top:0;height:130px;
-  background:linear-gradient(to bottom, rgba(185,35,107,.1), transparent);
+  background:linear-gradient(to bottom, rgba(110,31,58,.1), transparent);
   pointer-events:none;
 }
 .cta-band h2{font-size:clamp(22px,3vw,30px);margin:0 0 18px;font-weight:700;}
@@ -400,7 +399,7 @@ form input,form textarea{
   font-family:inherit;background:var(--surface);color:var(--text);
   transition:border-color .2s ease, box-shadow .2s ease;
 }
-form input:focus,form textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(185,35,107,.12);}
+form input:focus,form textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(110,31,58,.12);}
 form textarea{min-height:120px;resize:vertical;}
 .checkbox-row{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text-body);margin-bottom:22px;}
 .checkbox-row input{width:16px;height:16px;margin-top:2px;}
@@ -446,15 +445,15 @@ footer{background:var(--night);color:var(--white);padding:56px 24px 0;margin-top
 /* ---------- Textmarkierung im Corporate Design ---------- */
 ::selection{background:var(--accent);color:var(--white);}
 ::-moz-selection{background:var(--accent);color:var(--white);}
-/* Auf farbigen/dunklen Flächen: Honiggelb mit dunkler Schrift — dort klar sichtbar */
+/* Auf farbigen/dunklen Flächen: Sandgold mit dunkler Schrift — dort klar sichtbar */
 .page-hero ::selection,.hero ::selection,.cta-band ::selection,
 footer ::selection,.transition-bar ::selection,.info-card ::selection,
 .photo-block ::selection,.avatar ::selection{
-  background:var(--honey);color:var(--night);
+  background:var(--sand);color:var(--night);
 }
 .page-hero ::-moz-selection,.hero ::-moz-selection,.cta-band ::-moz-selection,
 footer ::-moz-selection,.transition-bar ::-moz-selection,.info-card ::-moz-selection{
-  background:var(--honey);color:var(--night);
+  background:var(--sand);color:var(--night);
 }
 
 /* ---------- Übergangs-Banner (nach einigen Monaten entfernbar) ---------- */
@@ -502,7 +501,7 @@ footer ::-moz-selection,.transition-bar ::-moz-selection,.info-card ::-moz-selec
 .person:hover .avatar{filter:saturate(1.15) brightness(1.05);}
 
 .cta-btn{transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;}
-.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(185,35,107,.28);filter:saturate(1.08);}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(110,31,58,.28);filter:saturate(1.08);}
 .cta-btn:active{transform:translateY(0);}
 .cta-btn.ghost:hover{box-shadow:0 8px 20px rgba(31,21,37,.14);}
 
