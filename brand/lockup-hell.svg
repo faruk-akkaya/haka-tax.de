@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1590.966396875 217">
+        <g transform="scale(0.9863636363636363)"><path d="M0 0 L25 0 L75 50 L75 0 L100 0 L100 100 L0 100 L0 75 L50 75 L0 25 Z" fill="#D9A441" transform="translate(0 0)"/><path d="M0 0 L25 0 L75 50 L75 0 L100 0 L100 100 L0 100 L0 75 L50 75 L0 25 Z" fill="#8B7D85" transform="translate(220 0) scale(-1 1)"/><path d="M0 0 L25 0 L75 50 L75 0 L100 0 L100 100 L0 100 L0 75 L50 75 L0 25 Z" fill="#9B1E52" transform="translate(0 220) scale(1 -1)"/><path d="M0 0 L25 0 L75 50 L75 0 L100 0 L100 100 L0 100 L0 75 L50 75 L0 25 Z" fill="#5A1230" transform="translate(220 220) scale(-1 -1)"/></g>
+        <rect x="263.9371" y="0" width="7.3129" height="217" fill="#211E19"/>
+        <text x="318.1871" y="217" font-family="'Inter','IBM Plex Sans',system-ui,sans-serif" font-weight="400" font-size="300" fill="#211E19">haka-tax</text>
+      </svg>

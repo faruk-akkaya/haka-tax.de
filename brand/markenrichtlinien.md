@@ -1,144 +1,161 @@
-# Markenumstellung haka tax – neues Signet und neue Farben
+# haka tax – Markenzeichen und Farbsystem
 
-Dieser Text ist die vollständige Vorgabe für alle Anpassungen (Website, Markenrichtlinien,
-Briefpapier, Vorlagen, digitale Profile). Er ist so geschrieben, dass er ohne weitere
-Rückfragen an einen Webentwickler, eine Grafikerin oder ein KI-Werkzeug übergeben werden kann.
-Die zugehörigen Logodateien liegen im Ordner `haka-tax-logo/` (SVG-Master in `svg/`,
-Rasterexporte in `png/`).
+Finale, vom Grafikdesigner freigegebene Fassung. Sie ersetzt alle vorherigen
+Logo-Entwürfe (unter anderem das frühere 2×2-Signet aus gerundeten Blöcken)
+vollständig. Die Masterdateien liegen neben diesem Dokument in `brand/`.
 
 ---
 
-## 1. Das Signet
+## 1. Das Icon
 
-Vier gerundete Blöcke im 2×2-Raster. Jeder Block ist an seiner **äußeren** Ecke gerundet;
-die vier **inneren** Ecken sind gefast, sodass die Fuge in der Mitte eine kleine Raute bildet.
+Vier Pfeile, die zur Mitte zeigen — eine feste Vektorform, kein Farbverlauf.
 Lesart: vier Partner, die auf einen gemeinsamen Punkt ausgerichtet sind.
 
-Vektorquelle (Raster 120 × 120, Blöcke 34 × 34, Fuge 4, Außenradius 8, Fase 10):
+Ein Viertel, lokal 0..100 (Ecke außen = (0,0), Ecke innen/Mitte = (100,100));
+die anderen drei Viertel sind exakt diese Form, gespiegelt:
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
-  <path d="M32 24 L58 24 L58 48 L48 58 L24 58 L24 32 A8 8 0 0 1 32 24 Z" fill="#D9A441"/>
-  <path d="M62 24 L88 24 A8 8 0 0 1 96 32 L96 58 L72 58 L62 48 Z"         fill="#8B7D85"/>
-  <path d="M24 62 L48 62 L58 72 L58 96 L32 96 A8 8 0 0 1 24 88 Z"         fill="#9B1E52"/>
-  <path d="M72 62 L96 62 L96 88 A8 8 0 0 1 88 96 L62 96 L62 72 Z"         fill="#5A1230"/>
+<path d="M0 0 L25 0 L75 50 L75 0 L100 0 L100 100 L0 100 L0 75 L50 75 L0 25 Z"/>
+```
+
+Vollständiges Icon (viewBox `0 0 220 220`):
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220">
+  <path d="M0 0 L25 0 L75 50 L75 0 L100 0 L100 100 L0 100 L0 75 L50 75 L0 25 Z" fill="#D9A441"/>
+  <path d="M0 0 L25 0 L75 50 L75 0 L100 0 L100 100 L0 100 L0 75 L50 75 L0 25 Z" fill="#8B7D85" transform="translate(220 0) scale(-1 1)"/>
+  <path d="M0 0 L25 0 L75 50 L75 0 L100 0 L100 100 L0 100 L0 75 L50 75 L0 25 Z" fill="#9B1E52" transform="translate(0 220) scale(1 -1)"/>
+  <path d="M0 0 L25 0 L75 50 L75 0 L100 0 L100 100 L0 100 L0 75 L50 75 L0 25 Z" fill="#5A1230" transform="translate(220 220) scale(-1 -1)"/>
 </svg>
 ```
 
-Farbzuordnung (fest, nie vertauschen):
+Feste Regeln:
 
-| Block          | Rolle       | Heller Grund | Dunkler Grund |
-|----------------|-------------|--------------|---------------|
-| oben links     | Gold        | `#D9A441`    | `#E3B35A`     |
-| oben rechts    | Warmgrau    | `#8B7D85`    | `#A79AA3`     |
-| unten links    | Himbeere    | `#9B1E52`    | `#C43A72`     |
-| unten rechts   | Wein        | `#5A1230`    | `#8E2A55`     |
-
-Regeln:
-- Der Rand des 120er-Rasters (24 Einheiten um die Blöcke) ist der **Schutzraum**. Innerhalb
-  dieses Raums steht nichts anderes. Bei Skalierung: Schutzraum = ein Drittel der Blockbreite.
-- Die Form wird nicht gedreht, gespiegelt, verzerrt, mit Verlauf, Schatten oder Kontur versehen.
-- Die Fuge und die Rautenmitte bleiben immer frei (Hintergrundfarbe).
+- Reihenfolge/Position der vier Farben nie vertauschen: oben links Gold, oben
+  rechts Grau, unten links Beere, unten rechts Dunkel.
+- Die Fuge in der Mitte bleibt proportional erhalten — nie auf 0 setzen (die
+  Form würde kollabieren), nie größer skalieren als hier vorgegeben.
+- Form nicht verzerren, **nicht drehen**, keine Schatten/Verläufe/Konturen.
 - **Mindestgröße:** 16 px als Favicon, 8 mm im Druck.
-- **Dunkler Grund** (Footer, Dark Mode, dunkle Präsentationsfolien): die aufgehellte Fassung
-  verwenden (`haka-tax-signet-dunkler-grund.svg`), nie die helle Fassung auf Dunkel legen.
-- **Einfarbig** (Stempel, Prägung, Fax, Schwarz-Weiß-Druck): alle vier Blöcke in Schwarz
-  (`#211E19`) bzw. auf Dunkel in Creme (`#F0ECE1`). Datei `haka-tax-signet-einfarbig*.svg`.
+- **Dunkler Grund** (Footer, Dark Mode, dunkle Folien): die aufgehellte Fassung
+  `icon-farbig-dunkel.svg` verwenden, nie die helle Fassung auf Dunkel legen.
+- **Graustufen:** `icon-graustufen.svg` / `icon-graustufen-dunkel.svg`.
+  **Schwarz/Weiß** (Stempel, Fax, Einfarbdruck): `icon-schwarz.svg` auf hellem,
+  `icon-weiss.svg` auf dunklem Grund.
 
 ## 2. Farbsystem
 
-| Token           | Hell (Grund weiß/creme) | Dunkel (Grund `#1B1714`) | Verwendung |
-|-----------------|-------------------------|--------------------------|-----------|
-| `--gold`        | `#D9A441` | `#E3B35A` | Akzent: Hervorhebungen, aktive Zustände, Icons, Badges |
-| `--graualt`     | `#8B7D85` | `#A79AA3` | ruhige Sekundärflächen, Linien, Meta-Text |
-| `--himbeere`    | `#9B1E52` | `#C43A72` | **Hauptfarbe**: Primär-Buttons, Links, Überschriften-Akzent |
-| `--wein`        | `#5A1230` | `#8E2A55` | Zweitfarbe: Hover/Aktiv von Himbeere, dunkle Flächen, Footer |
-| `--tinte`       | `#211E19` | `#F0ECE1` | Fließtext / Text auf Dunkel |
-| `--papier`      | `#FFFFFF` | `#1B1714` | Seitenhintergrund |
-| `--papier-2`    | `#F2EFE7` | `#272219` | Sektionen, Karten, Formularfelder |
+| Name / Token | Hex | CMYK | Rolle im Icon |
+|---|---|---|---|
+| HakaGold `--gold` | `#D9A441` | 14/36/85/0 | oben links |
+| HakaGrey `--graualt` | `#8B7D85` | 45/45/34/17 | oben rechts |
+| HakaBerry `--himbeere` | `#9B1E52` | 28/100/36/23 | unten links |
+| HakaDark `--wein` | `#5A1230` | 40/100/41/60 | unten rechts |
 
-Hinweise zur Abgrenzung: Die Hauptfarbe ist bewusst **kein** Telekom-Magenta (`#E20074`) und
-**kein** Blauviolett wie bei Grant Thornton (`#4F2D7F`). Kein reines Magenta, kein Neon, kein
-Blauviolett irgendwo im Auftritt einführen. Gold ist Akzent, nie Fläche für Fließtext.
+Auf dunklem Grund bleibt HakaGold bei 100 %, die anderen drei werden 50 %
+Richtung Weiß aufgehellt:
 
-Kontrast: Himbeere `#9B1E52` auf Weiß erfüllt WCAG AA für Text; Gold `#D9A441` auf Weiß
-**nicht** – Gold daher nie als Textfarbe auf hellem Grund, nur als Fläche, Linie oder Icon.
-Auf dunklem Grund gilt umgekehrt: Text in Creme, Akzente in den aufgehellten Werten.
+| Name | Hex (dunkler Grund) |
+|---|---|
+| HakaGold | `#D9A441` (unverändert) |
+| HakaGrey | `#C5BEC2` |
+| HakaBerry | `#CD8EA8` |
+| HakaDark | `#AC8897` |
+
+Rollen in der Anwendung: **HakaBerry ist die Hauptfarbe** (Primär-Buttons,
+Links, Überschriften-Akzent), HakaGold bleibt Akzent-/Highlight-Farbe,
+HakaDark ist Zweitfarbe (Hover/Aktiv, dunkle Flächen, Footer), HakaGrey trägt
+ruhige Sekundärflächen, Linien und Meta-Text.
+
+Weitere Tokens der Website: `--tinte` `#211E19` hell / `#F0ECE1` dunkel
+(Fließtext), `--papier` `#FFFFFF` / `#1B1714` (Seitengrund), `--papier-2`
+`#F2EFE7` / `#272219` (Sektionen, Karten, Formularfelder).
+
+Abgrenzung: Die Hauptfarbe ist bewusst **kein** Telekom-Magenta (`#E20074`) und
+**kein** Blauviolett wie bei Grant Thornton (`#4F2D7F`). Kein reines Magenta,
+kein Neon, kein Blauviolett irgendwo im Auftritt einführen.
+
+Kontrast: HakaBerry `#9B1E52` auf Weiß erfüllt WCAG AA für Text (7,8:1); Gold
+`#D9A441` auf Weiß **nicht** – Gold daher nie als Textfarbe auf hellem Grund,
+nur als Fläche, Linie oder Icon. Auf dunklem Grund gilt umgekehrt: Text in
+Creme, Akzente in den aufgehellten Werten (HakaBerry dunkel: 6,8:1).
+HakaGrey `#8B7D85` erreicht als kleiner Text auf Weiß nur 3,9:1 — für Meta-Text
+nutzt die Website deshalb die abgedunkelte Variante `--text-muted` `#71656C`,
+während `#8B7D85` unverändert für Linien, Flächen und das Icon gilt.
 
 ## 3. Wortmarke und Kombination
 
-- Die Wortmarke lautet ausschließlich **„haka tax“** (Kleinschreibung, Leerzeichen; alternativ
-  „haka-tax“ oder „haka.tax“, wenn technisch nötig). Kein Zusatz „Steuerberatung“ im Logo.
-- Schrift: die Headline-Schrift der Website (derzeit Inter), Schnitt SemiBold (600), leicht
-  negativ gesperrt (−0,01 em). Farbe: `--tinte`. Datei `haka-tax-wortmarke.svg` enthält den
-  Text als Textobjekt; für Druck von der Grafikerin in Pfade wandeln.
-- Anordnung: **Signet immer links, Wortmarke rechts**, beide auf gemeinsamer Mittelachse.
-  Abstand Signet → Wortmarke: 0,3 × Signethöhe. Versalhöhe der Wortmarke ≈ 0,55 × Signethöhe.
-- Nie: Signet zwischen den Wörtern, Signet rechts, Wortmarke über/unter dem Signet (Ausnahme:
-  zentrierte Anwendung auf Deckblättern, dort Signet oben, Wortmarke darunter, mittig).
+**Genau zwei zulässige Erscheinungsformen — keine dritte Variante:**
 
-## 4. Website (Repository haka-tax.de)
+1. **Nur das Icon**, ohne Text und ohne Trennstrich. Für Favicon, App-Icon,
+   Profilbild und als alleinstehende Bildmarke, wenn der Markenname bereits
+   anderswo steht.
+2. **Icon + Trennstrich + „haka-tax"**, in dieser festen Reihenfolge:
+   `Icon | haka-tax`. Überall, wo Icon und Firmenname gemeinsam auftreten —
+   Header, Footer, Briefkopf, Signatur, Deckblätter.
 
-Nur Logo, Favicon und Farbsystem ändern. Layout, Typografie, Inhalte und Struktur bleiben.
+Es gibt **keine** Variante „Icon + Text ohne Trennstrich" und **keinen** Zusatz
+wie „Steuerberatung" innerhalb des Zeichens.
 
-1. `favicon.svg` durch `svg/haka-tax-favicon.svg` ersetzen (weiße gerundete Kachel, Radius 26,
-   mit dem Signet). Die inline `data:image/svg+xml`-Favicons auf allen 16 Seiten (8 DE + 8 EN)
-   durch denselben Inhalt ersetzen. Zusätzlich `png/favicon/favicon-180.png` als
-   `apple-touch-icon` und `favicon-192.png`/`favicon-512.png` fürs Web-App-Manifest einbinden.
-2. Header- und Footer-Logo auf allen 16 Seiten: die vier `<path>`-Elemente aus Abschnitt 1
-   übernehmen. Im Header (heller Grund) die hellen Werte, im Footer (dunkler Grund) die
-   dunklen Werte. Die Wortmarke bleibt Live-Text „haka tax“ in der bestehenden Schrift; falls
-   dort noch „haka-tax“ steht, so lassen (Schreibweise ist frei).
-3. `styles.css`: die bisherigen Marken-Tokens (`--raspberry`, `--violet`, `--honey`, `--mauve`)
-   entfernen und durch die Tokens aus Abschnitt 2 ersetzen. Jede Stelle mitziehen, die die
-   alten Tokens referenziert: Buttons (`.cta-btn`, `.accent`, `.ghost`), Hero-Verlauf,
-   Links, Hover/Active/Focus, Badges/Tags, Footer, `.lang-notice`, Formular-Fokusringe.
-   Zuordnung: Violett → Wein, Himbeerrot → Himbeere (neuer Wert), Honig → Gold, Mauve → Warmgrau.
-   Dark-Mode-Block entsprechend mit den dunklen Werten.
-4. `og-image.png` mit dem neuen Signet neu erzeugen (1200 × 630, Signet links, Wortmarke rechts,
-   Grund `#F2EFE7`).
-5. Prüfen: Kontrast AA für Text in beiden Themes, Screenshots von Header, Footer, Hero, einem
-   Button-Zustand und Favicon in Hell und Dunkel, je eine DE- und eine EN-Seite.
+**Kritische Maßregel:** Die Höhe des Icons entspricht **exakt** der Höhe des
+kleinen „h" in „haka-tax" (Oberlänge bis Grundlinie). Icon-Unterkante =
+Grundlinie des Textes.
 
-## 5. Markenrichtlinien (Dokument, 8–10 Seiten)
+Weitere Maße, proportional zur Icon-Höhe H:
 
-Aufbau: 1 Signet und Herleitung · 2 Schutzraum, Mindestgrößen, Varianten (Farbe, dunkler
-Grund, einfarbig) · 3 Fehlanwendungen (drehen, verzerren, Verlauf, Kontur, Farben tauschen,
-Signet zwischen Text) · 4 Wortmarke und Kombination · 5 Farbsystem mit Hex/RGB/CMYK/Pantone-
-Näherung (CMYK und Pantone von der Grafikerin bestimmen; Bildschirmwerte oben sind verbindlich)
-· 6 Typografie (Website-Schrift, Schnitte, Größenstaffel) · 7 Anwendungen (Briefpapier,
-Visitenkarte, E-Mail-Signatur, Präsentation, Social) · 8 Dateiübersicht.
+- Abstand Icon → Trennstrich: 0,216 × H
+- Trennstrich: Breite 0,034 × H, Höhe = H
+- Abstand Trennstrich → Text: 0,216 × H
+- Schrift: **Inter, Regular (400)** — kein Fett, keine Kursive, Laufweite
+  −0,01 em. In Inter entspricht die h-Höhe 0,7234 em, der Schriftgrad ergibt
+  sich also als H ÷ 0,7234.
+- Textfarbe: `#211E19` auf hellem, `#F0ECE1` auf dunklem Grund.
 
-## 6. Geschäftsausstattung
+Fertige Lockups: `lockup-hell.svg` und `lockup-dunkel.svg`.
 
-- **Briefbogen (DIN A4):** Signet oben links, 12 mm hoch, 20 mm vom linken und oberen Rand;
-  Wortmarke rechts daneben nach Regel 3. Absender-/Fußzeile in `--tinte`, Trennlinie in
-  `--graualt`, Seitenzahl/Folgeseiten nur Signet 8 mm. Keine Farbflächen im Brieftext.
-- **Visitenkarte (85 × 55 mm):** Vorderseite weiß, Signet + Wortmarke links oben; Rückseite
-  Wein `#5A1230` vollflächig mit Signet in der dunklen Fassung, mittig, 22 mm.
-- **E-Mail-Signatur:** Signet 48 px (PNG `favicon-transparent-64.png` auf 48 px skaliert),
-  daneben Name/Funktion in `--tinte`, Kontaktzeile in `--graualt`, Link in `--himbeere`.
-- **Präsentation (Word/PowerPoint):** Titelfolie Grund `#F2EFE7`, Signet + Wortmarke; Inhaltsfolien
-  Signet 10 mm rechts unten; Akzentfarbe Gold für Marker, Himbeere für Überschriften-Akzent,
-  Diagramme in Himbeere/Wein/Gold/Warmgrau.
-- **Social-Profile:** Profilbild = `png/favicon/favicon-512.png` (Signet auf weißer Kachel);
-  Titelbild Grund `#F2EFE7` mit Signet + Wortmarke mittig.
-- **Stempel/Prägung:** einfarbige Fassung, Signet ≥ 8 mm.
+## 4. Umsetzung auf der Website (Repository haka-tax.de)
 
-## 7. Dateien
+Umgesetzter Stand:
+
+- `favicon.svg` = `brand/favicon.svg` (Icon auf weißer gerundeter Kachel); der
+  identische Inhalt liegt als inline `data:image/svg+xml` in allen 16 Seiten
+  (8 DE + 8 EN). `apple-touch-icon.png`, `icon-192.png` und `icon-512.png`
+  stammen aus den PNG-Exporten des Designers.
+- Header und Footer tragen die Kombi-Form `Icon | haka-tax` (Regel 3.2). Die
+  Wortmarke bleibt Live-Text in Inter Regular; Maße und Abstände leiten sich in
+  `styles.css` proportional aus `--lockup-h` ab (siehe Abschnitt „Marken-Lockup").
+- Das Header-Icon füllt seine vier Viertel aus den Marken-Tokens und wechselt
+  damit im Dunkelmodus automatisch auf die aufgehellte Fassung. Das Footer-Icon
+  liegt in beiden Themes fest auf der Weinfläche und nutzt feste dunkle Werte.
+- `og-image.png` (1200 × 630) zeigt die Kombi-Form auf `#F2EFE7`.
+
+## 5. Geschäftsausstattung
+
+- **Briefbogen (DIN A4):** Icon oben links, 12 mm hoch, 20 mm vom linken und
+  oberen Rand; Wortmarke nach Regel 3 rechts daneben. Absender-/Fußzeile in
+  `--tinte`, Trennlinie in HakaGrey, Folgeseiten nur Icon 8 mm.
+- **Visitenkarte (85 × 55 mm):** Vorderseite weiß, Lockup links oben; Rückseite
+  HakaDark `#5A1230` vollflächig mit dem Icon in der dunklen Fassung, mittig, 22 mm.
+- **E-Mail-Signatur:** Icon 48 px, daneben Name/Funktion in `--tinte`,
+  Kontaktzeile in HakaGrey, Link in HakaBerry.
+- **Präsentation:** Titelfolie Grund `#F2EFE7` mit Lockup; Inhaltsfolien Icon
+  10 mm rechts unten; Diagramme in Beere/Dunkel/Gold/Grau.
+- **Social-Profile:** Profilbild = Icon auf weißer Kachel (512 px).
+- **Stempel/Prägung:** einfarbige Fassung, Icon ≥ 8 mm.
+
+## 6. Dateien in diesem Ordner
 
 ```
-svg/haka-tax-signet.svg                    Master, heller Grund, transparent, Schutzraum enthalten
-svg/haka-tax-signet-dunkler-grund.svg      aufgehellte Fassung für dunklen Grund
-svg/haka-tax-signet-einfarbig.svg          Schwarz
-svg/haka-tax-signet-einfarbig-weiss.svg    Creme, für dunklen Grund einfarbig
-svg/haka-tax-favicon.svg                   Signet auf weißer gerundeter Kachel
-svg/haka-tax-wortmarke.svg                 Signet + „haka tax“ (Text als Textobjekt)
-svg/haka-tax-wortmarke-dunkler-grund.svg
-png/signet/…                               256 / 512 / 1024 / 2048 px, transparent; plus auf Weiß/Dunkel
-png/favicon/…                              16 / 32 / 48 / 64 / 128 / 180 / 192 / 512 px
-png/wortmarke/…                            3000 px breit, transparent und auf Grund
-png/einfarbig/…                            512 / 2048 px, Schwarz und Creme
+icon-farbig.svg              Master, heller Grund, transparent
+icon-farbig-dunkel.svg       aufgehellte Fassung für dunklen Grund
+icon-graustufen.svg          Graustufen, heller Grund
+icon-graustufen-dunkel.svg   Graustufen, dunkler Grund
+icon-schwarz.svg             Schwarz, für hellen Grund
+icon-weiss.svg               Weiß, für dunklen Grund
+favicon.svg                  Icon auf weißer gerundeter Kachel
+lockup-hell.svg              Icon | haka-tax, helle Fassung
+lockup-dunkel.svg            Icon | haka-tax, dunkle Fassung
 ```
 
-Vor der endgültigen Freigabe: formale Markenrecherche (DPMA/EUIPO) auf die Bildmarke.
+Vor der endgültigen Veröffentlichung: formale Markenrecherche (DPMA/EUIPO) auf
+die Bildmarke.
