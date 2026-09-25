@@ -93,9 +93,18 @@
   --surface-glass:rgba(242,239,231,.78);
   --surface-glass-strong:rgba(255,255,255,.9);
   --glass-hairline:rgba(255,255,255,.6);
+  /* Header-Glas: Ruhezustand nahezu deckend, Scroll-Zustand betont transparent. */
+  --header-glass:rgba(255,255,255,.88);
+  --header-glass-scrolled:rgba(255,255,255,.55);
+  --header-glass-edge:rgba(255,255,255,.65);
+  --header-hairline:rgba(33,30,25,.08);
+  --header-shadow:rgba(33,30,25,.14);
   --text:var(--tinte);
   --accent:var(--himbeere);
   --accent-2:var(--wein);
+  /* Textfarbe der Auswahlmarkierung: auf der dunklen Himbeere hell, auf der
+     aufgehellten Dunkelmodus-Himbeere dunkel — sonst Hell-auf-Hell. */
+  --selection-text:var(--creme);
   --highlight-bg:#FFF3D6;
   --highlight-text:#7a5a1a;
 
@@ -109,17 +118,24 @@
 
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --gold:#E3B35A;
-    --graualt:#A79AA3;
-    --himbeere:#C43A72;
-    --wein:#8E2A55;
+    /* Markenwerte auf dunklem Grund laut Vorgabe: Gold bleibt unverändert,
+       die anderen drei werden 50 % Richtung Weiß aufgehellt. */
+    --gold:#D9A441;
+    --graualt:#C5BEC2;
+    --himbeere:#CD8EA8;
+    --wein:#AC8897;
     --tinte:#F0ECE1;
     --papier:#1B1714;
     --papier-2:#272219;
-    --surface-alt:linear-gradient(135deg, rgba(227,179,90,.09), rgba(167,154,163,.09));
+    --surface-alt:linear-gradient(135deg, rgba(217,164,65,.09), rgba(197,190,194,.09));
     --surface-glass:rgba(39,34,25,.62);
     --surface-glass-strong:rgba(27,23,20,.82);
     --glass-hairline:rgba(240,236,225,.08);
+    --header-glass:rgba(27,23,20,.86);
+    --header-glass-scrolled:rgba(27,23,20,.52);
+    --header-glass-edge:rgba(240,236,225,.1);
+    --header-hairline:rgba(240,236,225,.1);
+    --header-shadow:rgba(0,0,0,.45);
     --border-faint:#272219;
     --border:#362F22;
     --border-card:#302A1F;
@@ -128,31 +144,36 @@
     --text-muted:#A79AA3;
     --text-body:#D6CFC2;
     --text-deep:#E8E2D6;
-    /* Himbeere in der aufgehellten Fassung (#C43A72) erreicht als kleiner
-       Text auf dunklem Grund nur 3,6:1. Für Link-/Akzenttext daher eine
-       zusätzlich aufgehellte Variante derselben Farbe (5,3:1); --himbeere
-       selbst bleibt für Flächen, Ränder und Icons der Richtlinienwert. */
-    --accent:#D36994;
+    /* Die Himbeere der Dunkelfassung (#CD8EA8) erreicht als kleiner Text auf
+       #1B1714 bereits 6,8:1 — eine zusätzlich abgeleitete Link-Variante wie
+       früher ist damit nicht mehr nötig. */
+    --accent:var(--himbeere);
     --accent-2:var(--wein);
+    --selection-text:var(--tinte-fix);
     --highlight-bg:#4A3B1A;
     --highlight-text:#F5D98C;
     --atmosphere:
-      radial-gradient(60% 50% at 15% 8%, rgba(227,179,90,.1), transparent 65%),
-      radial-gradient(55% 45% at 88% 52%, rgba(167,154,163,.1), transparent 65%);
+      radial-gradient(60% 50% at 15% 8%, rgba(217,164,65,.1), transparent 65%),
+      radial-gradient(55% 45% at 88% 52%, rgba(197,190,194,.1), transparent 65%);
   }
 }
 :root[data-theme="dark"]{
-  --gold:#E3B35A;
-  --graualt:#A79AA3;
-  --himbeere:#C43A72;
-  --wein:#8E2A55;
+  --gold:#D9A441;
+  --graualt:#C5BEC2;
+  --himbeere:#CD8EA8;
+  --wein:#AC8897;
   --tinte:#F0ECE1;
   --papier:#1B1714;
   --papier-2:#272219;
-  --surface-alt:linear-gradient(135deg, rgba(227,179,90,.09), rgba(167,154,163,.09));
+  --surface-alt:linear-gradient(135deg, rgba(217,164,65,.09), rgba(197,190,194,.09));
   --surface-glass:rgba(39,34,25,.62);
   --surface-glass-strong:rgba(27,23,20,.82);
   --glass-hairline:rgba(240,236,225,.08);
+  --header-glass:rgba(27,23,20,.86);
+  --header-glass-scrolled:rgba(27,23,20,.52);
+  --header-glass-edge:rgba(240,236,225,.1);
+  --header-hairline:rgba(240,236,225,.1);
+  --header-shadow:rgba(0,0,0,.45);
   --border-faint:#272219;
   --border:#362F22;
   --border-card:#302A1F;
@@ -161,13 +182,14 @@
   --text-muted:#A79AA3;
   --text-body:#D6CFC2;
   --text-deep:#E8E2D6;
-  --accent:#D36994;
+  --accent:var(--himbeere);
   --accent-2:var(--wein);
+  --selection-text:var(--tinte-fix);
   --highlight-bg:#4A3B1A;
   --highlight-text:#F5D98C;
   --atmosphere:
-    radial-gradient(60% 50% at 15% 8%, rgba(227,179,90,.1), transparent 65%),
-    radial-gradient(55% 45% at 88% 52%, rgba(167,154,163,.1), transparent 65%);
+    radial-gradient(60% 50% at 15% 8%, rgba(217,164,65,.1), transparent 65%),
+    radial-gradient(55% 45% at 88% 52%, rgba(197,190,194,.1), transparent 65%);
 }
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;height:100%;}
@@ -213,11 +235,34 @@ img{max-width:100%;display:block;}
 .container{max-width:1120px;margin:0 auto;padding:0 24px;}
 
 /* Header */
-header{position:sticky;top:0;background:var(--surface-glass-strong);-webkit-backdrop-filter:blur(12px) saturate(1.1);backdrop-filter:blur(12px) saturate(1.1);box-shadow:inset 0 -1px 0 rgba(33,30,25,.07);z-index:50;transition:box-shadow .25s ease;}
-header.scrolled{box-shadow:inset 0 -1px 0 rgba(33,30,25,.07), 0 8px 24px rgba(33,30,25,.12);}
+/* Der Header liegt am Seitenanfang auf ruhigem Grund und wird beim Scrollen
+   zu echtem Milchglas: deutlich transparenter, deutlich stärker unscharf, mit
+   angehobener Sättigung — der Inhalt darunter bleibt als Farbschleier sichtbar,
+   ohne die Lesbarkeit der Navigation anzutasten. Werte in --header-glass* je
+   Theme, damit Hell und Dunkel denselben Effekt in eigener Tonlage bekommen. */
+header{
+  position:sticky;top:0;z-index:50;
+  background:var(--header-glass);
+  -webkit-backdrop-filter:blur(10px) saturate(1.05);
+  backdrop-filter:blur(10px) saturate(1.05);
+  box-shadow:inset 0 -1px 0 var(--header-hairline);
+  transition:background-color .3s ease, box-shadow .3s ease,
+             -webkit-backdrop-filter .3s ease, backdrop-filter .3s ease;
+}
+header.scrolled{
+  background:var(--header-glass-scrolled);
+  -webkit-backdrop-filter:blur(32px) saturate(1.6);
+  backdrop-filter:blur(32px) saturate(1.6);
+  box-shadow:inset 0 1px 0 var(--header-glass-edge),
+             inset 0 -1px 0 var(--header-hairline),
+             0 10px 30px var(--header-shadow);
+}
+/* Browser ohne backdrop-filter bekommen eine deckendere Fläche, damit die
+   Navigation nicht auf durchscheinendem Inhalt steht. */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  header,header.scrolled{background:var(--surface-glass-strong);}
+}
 .nav-inner{max-width:1120px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
-.logo{font-weight:700;font-size:20px;display:flex;align-items:center;gap:6px;letter-spacing:-0.01em;flex-shrink:0;}
-.logo .dot{width:8px;height:8px;border-radius:2.5px;background:var(--y-grad);display:inline-block;}
 nav.main-nav{display:flex;gap:28px;font-size:14.5px;font-weight:600;}
 nav.main-nav a{opacity:.75;transition:opacity .15s;}
 nav.main-nav a:hover,nav.main-nav a.active{opacity:1;}
@@ -465,7 +510,7 @@ form textarea{min-height:120px;resize:vertical;}
 footer{background:var(--wein-fix);color:var(--creme);padding:56px 24px 0;margin-top:auto;}
 .footer-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;}
 @media (max-width:768px){ .footer-inner{grid-template-columns:1fr;gap:28px;} }
-.footer-inner .f-logo{font-weight:700;font-size:20px;margin-bottom:12px;}
+/* Maße des Footer-Lockups: siehe „Marken-Lockup" weiter unten. */
 .footer-inner p{font-size:13.5px;line-height:1.6;opacity:.75;margin:0;}
 .footer-inner strong{font-size:13px;letter-spacing:.06em;text-transform:uppercase;opacity:.6;display:block;margin-bottom:12px;}
 .legal-bar{border-top:1px solid rgba(240,236,225,.12);padding:20px 0;font-size:12.5px;opacity:.55;max-width:1120px;margin:0 auto;display:flex;gap:20px;flex-wrap:wrap;}
@@ -489,8 +534,8 @@ footer{background:var(--wein-fix);color:var(--creme);padding:56px 24px 0;margin-
 .lang-notice a{color:var(--accent);text-decoration:underline;font-style:normal;}
 
 /* ---------- Textmarkierung im Corporate Design ---------- */
-::selection{background:var(--accent);color:var(--creme);}
-::-moz-selection{background:var(--accent);color:var(--creme);}
+::selection{background:var(--accent);color:var(--selection-text);}
+::-moz-selection{background:var(--accent);color:var(--selection-text);}
 /* Auf farbigen/dunklen Flächen: Gold mit dunkler Schrift — dort klar sichtbar */
 .page-hero ::selection,.hero ::selection,.cta-band ::selection,
 footer ::selection,.transition-bar ::selection,.info-card ::selection,
@@ -570,17 +615,49 @@ nav.main-nav a::after{
 nav.main-nav a:hover::after,nav.main-nav a.active::after{transform:scaleX(1);}
 @media (max-width:1140px){ nav.main-nav a::after{display:none;} }
 
-/* Logo-Akzent */
-.logo .dot{transition:transform .25s ease;}
-.logo:hover .dot{transform:translateY(-2px) rotate(12deg);}
-.logo .mark{width:17px;height:17px;display:inline-block;line-height:0;flex-shrink:0;}
-.logo .mark svg{width:100%;height:100%;display:block;transition:transform .3s ease;}
-.logo:hover .mark svg{transform:rotate(90deg);}
-.logo{gap:8px;align-items:center;}
-.wm{font-weight:700;letter-spacing:-0.015em;white-space:nowrap;}
-footer .f-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:20px;margin-bottom:12px;}
-footer .f-logo .mark{width:16px;height:16px;display:inline-block;line-height:0;flex-shrink:0;}
-footer .f-logo .mark svg{width:100%;height:100%;display:block;}
+/* Marken-Lockup „Icon | haka-tax" (Kombi-Form der Markenvorgabe).
+   Alle Maße leiten sich proportional aus der Icon-Höhe --lockup-h ab, exakt
+   nach den Verhältnissen der gelieferten Master (svg/lockup-hell.svg):
+     Icon-Höhe H  =  Höhe des kleinen „h", Icon-Unterkante = Grundlinie
+     Icon → Trennstrich  0,216 × H   Trennstrich  0,034 × H breit, H hoch
+     Trennstrich → Text  0,216 × H   Schriftgrad  H / 0,7234 (h-Höhe in Inter)
+   Die Grundlinien-Bündigkeit entsteht über align-items:baseline; .mark und
+   .lockup-bar haben overflow:hidden, damit ihre Grundlinie die Unterkante ist. */
+.logo,footer .f-logo{
+  --lockup-h:18px;
+  display:flex;
+  align-items:baseline;
+  gap:0;
+  flex-shrink:0;
+  font-weight:400;
+  font-size:calc(var(--lockup-h) / 0.7234);
+  letter-spacing:-0.01em;
+}
+.logo .mark,footer .f-logo .mark{
+  width:var(--lockup-h);
+  height:var(--lockup-h);
+  display:inline-block;
+  overflow:hidden;
+  line-height:0;
+  flex-shrink:0;
+}
+.logo .mark svg,footer .f-logo .mark svg{width:100%;height:100%;display:block;}
+.lockup-bar{
+  display:inline-block;
+  overflow:hidden;
+  width:max(1px, calc(var(--lockup-h) * 0.034));
+  height:var(--lockup-h);
+  margin:0 calc(var(--lockup-h) * 0.216);
+  background:currentColor;
+  flex-shrink:0;
+}
+.wm{font-weight:400;letter-spacing:-0.01em;white-space:nowrap;}
+footer .f-logo{margin-bottom:12px;}
+/* Die Vorgabe untersagt jedes Drehen/Verzerren der Bildmarke (und das Drehen
+   würde die feste Farbposition der vier Viertel vertauschen). Der Hover-Effekt
+   des Header-Logos liegt daher auf dem ganzen Lockup, nicht auf der Form. */
+.logo{transition:opacity .2s ease;}
+.logo:hover{opacity:.78;}
 
 /* Links im Fließtext / Footer */
 .legal-bar a,.legal-content a{transition:opacity .2s ease,color .2s ease;}
