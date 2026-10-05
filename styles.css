@@ -122,8 +122,8 @@
        die anderen drei werden 50 % Richtung Weiß aufgehellt. */
     --gold:#D9A441;
     --graualt:#C5BEC2;
-    --himbeere:#CD8EA8;
-    --wein:#AC8897;
+    --himbeere:#CD8FA9;
+    --wein:#AD8998;
     --tinte:#F0ECE1;
     --papier:#1B1714;
     --papier-2:#272219;
@@ -144,7 +144,7 @@
     --text-muted:#A79AA3;
     --text-body:#D6CFC2;
     --text-deep:#E8E2D6;
-    /* Die Himbeere der Dunkelfassung (#CD8EA8) erreicht als kleiner Text auf
+    /* Die Himbeere der Dunkelfassung (#CD8FA9) erreicht als kleiner Text auf
        #1B1714 bereits 6,8:1 — eine zusätzlich abgeleitete Link-Variante wie
        früher ist damit nicht mehr nötig. */
     --accent:var(--himbeere);
@@ -160,8 +160,8 @@
 :root[data-theme="dark"]{
   --gold:#D9A441;
   --graualt:#C5BEC2;
-  --himbeere:#CD8EA8;
-  --wein:#AC8897;
+  --himbeere:#CD8FA9;
+  --wein:#AD8998;
   --tinte:#F0ECE1;
   --papier:#1B1714;
   --papier-2:#272219;
