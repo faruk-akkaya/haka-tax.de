@@ -588,6 +588,34 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 }
 
 
+/* ---------- Startseite: kurze Abschnitte ----------
+   Zweispaltig: Text links, Bild bzw. Bildplatzhalter rechts. */
+.grid-2.split{align-items:center;gap:64px;}
+.grid-2.split .section-lead{margin-bottom:24px;}
+/* „So arbeiten wir": drei Kurzsätze untereinander */
+.ways{display:grid;gap:24px;margin-top:8px;}
+.ways h3{font-size:var(--fs-4);margin:0 0 4px;}
+.ways p{font-size:var(--fs-3);line-height:1.55;color:var(--text-body);margin:0;max-width:44ch;}
+/* Textlink unter einem Abschnitt */
+.more{margin:32px 0 0;}
+/* Die vier Partner als ruhige Namensliste */
+.partners{list-style:none;margin:0;padding:24px 0 0;border-top:1px solid var(--border);
+  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.partners b{display:block;font-size:var(--fs-3);}
+.partners span{font-size:var(--fs-1);color:var(--text-muted);}
+@media (max-width:960px){ .partners{grid-template-columns:repeat(2,1fr);} .grid-2.split{gap:40px;} }
+@media (max-width:560px){ .partners{grid-template-columns:1fr;gap:16px;} }
+/* Werte auf der Team-Seite: Zwischenüberschrift vor dem Berufskodex */
+h3.subhead{font-size:var(--fs-4);margin:48px 0 16px;}
+.value-card p + p{margin-top:12px;}
+/* Einspaltiger Lesetext, z. B. „Was sich ändert": bündig mit Einstieg und
+   Logo links, aber auf Lesebreite begrenzt */
+.container.narrow > *{max-width:760px;}
+.container.narrow .section-lead{margin-bottom:24px;}
+p.section-lead.note{font-size:var(--fs-2);margin-top:24px;}
+.text-link{color:var(--accent);font-weight:600;}
+.text-link:hover{text-decoration:underline;}
+
 /* Nachfolge: Fragen der Bestandsmandanten */
 .faq{list-style:none;margin:22px 0 0;padding:0;}
 .faq li{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:13px 0;
@@ -597,9 +625,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 .faq span{color:var(--text-body);}
 @media (max-width:560px){ .faq li{grid-template-columns:1fr;gap:4px;} }
 
-/* ---------- Nachfolge-Abschnitt bewusst zurückhaltend ---------- */
-.subtle-block .section-title{font-size:var(--fs-4);}
-.subtle-block .section-lead{font-size:var(--fs-2);}
 
 /* ================= Bildflächen ================= */
 .shot{position:relative;overflow:hidden;border-radius:var(--r-l);background:var(--surface);}
