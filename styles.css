@@ -26,16 +26,13 @@
      768px  – Footer klappt um
      960px  – große Content-Grids klappen um
      1140px – Header-Nav klappt ins Mobil-Menü um
-   Header-Nav bekam einen eigenen, höheren Wert: seit Darkmode-Umschalter
-   und Sprachwahl dazukamen, passen Logo + 6 Nav-Punkte + 4 Header-Buttons
-   erst ab ~1140px nebeneinander (knapp über .nav-inners max-width:1120px,
-   damit nie eine Quetschzone entsteht, in der Logo/Buttons umbrechen).
+   Header-Nav hat einen eigenen, höheren Wert: Logo (rund 255 px), vier
+   Menüpunkte, Sprachwahl und Kontakt-Button passen erst ab ~1140px
+   nebeneinander (knapp über .nav-inners max-width:1120px).
    Rein kosmetische Feinjustierungen (z. B. Schriftgröße im Banner) bleiben
    davon unberührt und stehen an ihrer jeweiligen Stelle.
    Zusätzliche, punktuelle Stufe unterhalb der kleinsten Grid-Stufe:
-     380px  – Header-Icon-Cluster (LinkedIn/Sprache/Darkmode/Menü) wird
-              knapper, da vier Icon-Buttons + Logo auf sehr schmalen
-              Phones (ab 320px) sonst über den Viewport-Rand hinausragen. */
+     380px  – Kopfleiste rückt auf sehr schmalen Phones (ab 320px) enger. */
 
 /* ---------- Markenfarben (Markenrichtlinien Abschnitt 2) ----------
    Die vier Markenfarben plus Tinte/Papier wechseln zwischen Hell und Dunkel
@@ -243,11 +240,10 @@ header.scrolled{
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   header,header.scrolled{background:var(--surface-glass-strong);}
 }
-/* Die Abstände in der Kopfzeile sind auf das vergrößerte Logo abgestimmt: es
-   belegt rund 255 px der 1120 px breiten Zeile, Navigation und Schaltflächen
-   rücken dafür enger zusammen. Mit diesen Werten bleiben gut 10 px Reserve. */
-.nav-inner{max-width:1120px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
-nav.main-nav{display:flex;gap:18px;font-size:var(--fs-2);font-weight:600;}
+/* Eine Kopfleiste: Logo, vier Menüpunkte, Sprache, Kontakt. Band, Rechtliches,
+   LinkedIn und Hell/Dunkel sind in den Footer bzw. ganz gewichen. */
+.nav-inner{max-width:1120px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+nav.main-nav{display:flex;gap:32px;font-size:var(--fs-2);font-weight:600;}
 nav.main-nav a{opacity:.75;transition:opacity .15s;}
 nav.main-nav a:hover,nav.main-nav a.active{opacity:1;}
 .cta-btn{background:var(--himbeere-fix);color:var(--creme);padding:11px 20px;border-radius:var(--r-s);font-size:var(--fs-2);font-weight:600;white-space:normal;text-align:center;display:inline-block;}
@@ -258,24 +254,28 @@ nav.main-nav a:hover,nav.main-nav a.active{opacity:1;}
    .on-dark gesetzt ist. */
 .hero .cta-btn.ghost,.page-hero .cta-btn.ghost{color:var(--creme);border-color:rgba(240,236,225,.5);}
 .cta-btn.light{background:var(--creme);color:var(--wein-fix);}
-.header-actions{display:flex;align-items:center;gap:8px;}
+.header-actions{display:flex;align-items:center;gap:16px;}
 /* Der CTA bleibt einzeilig, solange die Desktop-Navigation steht. Darunter darf
    er weiter umbrechen — dort ist er die einzige Reserve, bevor die Zeile
    überläuft. In der Fläche (CTA-Band, Hero) bleibt der Umbruch ohnehin. */
 @media (min-width:1141px){
   .header-actions .cta-btn{white-space:nowrap;}
 }
-.social-btn{width:38px;height:38px;border-radius:var(--r-s);display:flex;align-items:center;justify-content:center;background:var(--surface);border:1.5px solid var(--border);color:var(--text);transition:border-color .15s,color .15s;flex-shrink:0;}
-.social-btn:hover{border-color:var(--accent);color:var(--accent);}
+/* LinkedIn und Hell/Dunkel sitzen rechts in der Fußleiste, auf der Weinfläche. */
+.legal-actions{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.social-btn{width:34px;height:34px;border-radius:var(--r-s);display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(240,236,225,.28);color:var(--creme);transition:border-color .15s,color .15s;flex-shrink:0;}
+.social-btn:hover{border-color:var(--gold);color:var(--gold);}
 
 /* Darkmode-Umschalter: zeigt je nach aktivem Theme Sonne oder Mond,
    rein per CSS gesteuert (kein JS-DOM-Umbau nötig). */
-.theme-toggle{width:38px;height:38px;border-radius:var(--r-s);display:flex;align-items:center;justify-content:center;background:var(--surface);border:1.5px solid var(--border);color:var(--text);cursor:pointer;flex-shrink:0;transition:border-color .15s,color .15s;}
-.theme-toggle:hover{border-color:var(--accent);color:var(--accent);}
+.theme-toggle{width:34px;height:34px;border-radius:var(--r-s);display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(240,236,225,.28);color:var(--creme);cursor:pointer;flex-shrink:0;transition:border-color .15s,color .15s;}
+.theme-toggle:hover{border-color:var(--gold);color:var(--gold);}
 
-/* Sprachumschalter (DE/EN) */
-.lang-switch{display:flex;align-items:center;justify-content:center;height:38px;padding:0 12px;border-radius:var(--r-s);background:var(--surface);border:1.5px solid var(--border);color:var(--text);font-size:var(--fs-1);font-weight:600;letter-spacing:var(--ls-wide);transition:border-color .15s,color .15s;flex-shrink:0;}
-.lang-switch:hover{border-color:var(--accent);color:var(--accent);}
+/* Sprachwahl als Text: aktuelle Sprache voll, die andere als leiser Link */
+.lang-switch{display:flex;align-items:center;gap:6px;font-size:var(--fs-2);font-weight:600;color:var(--text);flex-shrink:0;}
+.lang-switch .sep{color:var(--text-muted);}
+.lang-switch a{color:var(--text-muted);transition:color .15s;}
+.lang-switch a:hover{color:var(--accent);}
 .theme-toggle svg{display:block;}
 .theme-toggle .icon-sun{display:none;}
 :root[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
@@ -320,35 +320,7 @@ nav.main-nav a:hover,nav.main-nav a.active{opacity:1;}
 @media (max-width:380px){
   .nav-inner{padding-left:16px;padding-right:16px;gap:16px;}
   .header-actions{gap:8px;}
-  .social-btn,.theme-toggle{width:34px;height:34px;}
-  .lang-switch{padding:0 9px;}
   .nav-toggle{padding:6px;}
-}
-
-/* "Rechtliches"-Dropdown im Hauptmenü — natives <details>/<summary>, kein JS nötig */
-.nav-legal{position:relative;}
-.nav-legal summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:4px;}
-.nav-legal summary::-webkit-details-marker{display:none;}
-.nav-legal[open] summary,.nav-legal.active summary{opacity:1;}
-.nav-legal .chevron{width:10px;height:10px;transition:transform .2s ease;}
-.nav-legal[open] .chevron{transform:rotate(180deg);}
-.nav-legal-panel{
-  position:absolute;top:100%;right:0;margin-top:10px;min-width:180px;
-  background:var(--bg);
-  border:1px solid var(--border-card);border-radius:var(--r-l);padding:8px;
-  box-shadow:var(--shadow-float);
-  display:flex;flex-direction:column;gap:2px;
-}
-.nav-legal-panel a{padding:9px 10px;border-radius:var(--r-s);font-size:var(--fs-2);opacity:1;}
-.nav-legal-panel a::after{display:none;}
-.nav-legal-panel a:hover{background:var(--surface);}
-.nav-legal-panel a.active{font-weight:600;}
-@media (max-width:1140px){
-  .nav-legal{width:100%;}
-  .nav-legal summary{padding:12px 4px;font-size:var(--fs-3);border-bottom:1px solid var(--border-faint);opacity:1;}
-  .nav-legal-panel{position:static;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border:none;box-shadow:none;padding:0 0 0 14px;margin-top:0;}
-  .nav-legal-panel a{padding:10px 4px;border-bottom:1px solid var(--border-faint);border-radius:0;font-size:var(--fs-2);}
-  .nav-legal-panel a:hover{background:none;}
 }
 
 /* Hero (Startseite) — eigenständiger, differenzierter erster Eindruck:
@@ -485,7 +457,7 @@ footer{background:var(--wein-fix);color:var(--creme);padding:56px 24px 0;margin-
 /* Maße des Footer-Lockups: siehe „Marken-Lockup" weiter unten. */
 .footer-inner p{font-size:var(--fs-2);line-height:1.6;opacity:.75;margin:0;}
 .footer-inner strong{font-size:var(--fs-1);letter-spacing:var(--ls-wide);text-transform:uppercase;opacity:.6;display:block;margin-bottom:12px;}
-.legal-bar{border-top:1px solid rgba(240,236,225,.12);padding:20px 0;font-size:var(--fs-1);opacity:.55;max-width:1120px;margin:0 auto;display:flex;gap:20px;flex-wrap:wrap;}
+.legal-bar{border-top:1px solid rgba(240,236,225,.12);padding:20px 0;font-size:var(--fs-1);color:rgba(240,236,225,.62);max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
 .legal-bar a{opacity:1;}
 
 .source-note{font-size:var(--fs-1);color:var(--text-muted);margin-top:28px;line-height:1.6;}
@@ -510,29 +482,13 @@ footer{background:var(--wein-fix);color:var(--creme);padding:56px 24px 0;margin-
 ::-moz-selection{background:var(--accent);color:var(--selection-text);}
 /* Auf farbigen/dunklen Flächen: Gold mit dunkler Schrift — dort klar sichtbar */
 .page-hero ::selection,.hero ::selection,
-footer ::selection,.transition-bar ::selection{
+footer ::selection{
   background:var(--gold);color:var(--tinte-fix);
 }
 .page-hero ::-moz-selection,.hero ::-moz-selection,
-footer ::-moz-selection,.transition-bar ::-moz-selection{
+footer ::-moz-selection{
   background:var(--gold);color:var(--tinte-fix);
 }
-
-/* ---------- Übergangs-Banner (nach einigen Monaten entfernbar) ---------- */
-.transition-bar{
-  background:var(--tinte-fix);color:var(--creme);
-  font-size:13px;line-height:1.45;text-align:center;
-  padding:10px 20px;
-  display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
-}
-.transition-bar b{font-weight:700;}
-@media (max-width:520px){ .transition-bar{font-size:12px;padding:9px 14px;gap:8px;} }
-.badge-soon{
-  display:inline-block;font-size:11px;font-weight:800;letter-spacing:.09em;
-  text-transform:uppercase;color:var(--tinte-fix);background:var(--gold);
-  padding:4px 10px;border-radius:6px;white-space:nowrap;
-}
-@media (max-width:520px){ .badge-soon{font-size:10px;padding:3px 8px;} }
 
 /* ---------- Große Kennzahlen ---------- */
 .stat{display:flex;align-items:center;gap:16px;margin:0 0 24px;flex-wrap:wrap;}
@@ -631,7 +587,7 @@ footer .f-logo{margin-bottom:12px;}
 
 /* Links im Fließtext / Footer */
 .legal-bar a,.legal-content a{transition:opacity .2s ease,color .2s ease;}
-.legal-bar a:hover{opacity:.7;}
+.legal-bar a:hover{color:var(--creme);}
 .legal-content a:hover{color:var(--accent);}
 
 /* Kontaktlinks */
