@@ -65,6 +65,10 @@
      dem hellen Himbeere-Wert: die aufgehellte Dunkel-Fassung (#C43A72) käme
      mit Creme nur auf 4,2:1 und verfehlte AA. */
   --himbeere-fix:#9B1E52;
+  /* Einstiegsfläche: Wein mit leichter Aufhellung nach links, fest in beiden
+     Themes. Gedämpftes Creme darauf erreicht am hellsten Rand noch 4,8:1. */
+  --hero-bg:linear-gradient(to left, var(--wein-fix) 0%, var(--wein-fix) 62%, var(--wein-fix-2) 100%);
+  --creme-muted:rgba(240,236,225,.8);
 
   /* Raster: wenige feste Stufen statt gewachsener Einzelwerte. Jede Größe,
      jeder Radius und jeder Schatten im Stylesheet nimmt einen dieser Werte. */
@@ -315,27 +319,33 @@ nav.main-nav a:hover,nav.main-nav a.active{opacity:1;}
   .nav-toggle{padding:6px;}
 }
 
-/* Einstieg (Startseite und Unterseiten): weißer Grund, große Überschrift,
-   kein Kasten. Wein steht nur noch im Hauptbutton und in der Bildmarke, die
-   Fläche gehört dem Footer. Ein feiner Rand trennt den Einstieg vom Inhalt. */
-.hero,.page-hero{background:var(--bg);color:var(--text);border-bottom:1px solid var(--border);}
+/* Einstieg auf allen Seiten gleich: Weinfläche mit großer Überschrift direkt
+   darauf, ohne Glaskasten. Neben dem Footer die einzige farbige Fläche; sie
+   bleibt in Hell und Dunkel identisch. */
+.hero,.page-hero{background:var(--hero-bg);color:var(--creme);}
 .hero{padding:120px 24px 104px;}
 .page-hero{padding:96px 24px 64px;}
 .hero-panel{max-width:820px;margin:0;text-align:left;}
-.eyebrow{display:block;font-size:var(--fs-1);font-weight:600;letter-spacing:var(--ls-wide);text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;}
+.eyebrow{display:block;font-size:var(--fs-1);font-weight:600;letter-spacing:var(--ls-wide);text-transform:uppercase;color:var(--creme-muted);margin-bottom:16px;}
 .hero h1{font-size:var(--fs-7);line-height:1.05;margin:0 0 24px;letter-spacing:var(--ls-tight);}
-.hero .lead{font-size:var(--fs-4);line-height:1.5;color:var(--text-body);margin:0 0 40px;max-width:620px;}
+.hero .lead{font-size:var(--fs-4);line-height:1.5;color:var(--creme-muted);margin:0 0 40px;max-width:620px;}
 .hero-cta{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+/* Auf der Weinfläche ist der Hauptbutton hell — ein Himbeer-Button ginge im
+   Wein unter. */
+.hero .cta-btn,.page-hero .cta-btn{background:var(--creme);color:var(--wein-fix);}
+.hero .cta-btn:hover,.page-hero .cta-btn:hover{background:#FFFFFF;}
 /* Zweite Handlung als Textlink statt als zweiter Button */
 .hero-link{font-size:var(--fs-2);font-weight:600;color:var(--text);transition:color .15s;}
 .hero-link:hover{color:var(--accent);}
+.hero .hero-link{color:var(--creme);}
+.hero .hero-link:hover{color:var(--gold);}
 /* Hinweiszeile zum Start der Kanzlei über der Überschrift */
-.hint{display:flex;align-items:center;gap:10px;font-size:var(--fs-2);color:var(--text-muted);margin:0 0 24px;}
+.hint{display:flex;align-items:center;gap:10px;font-size:var(--fs-2);color:var(--creme-muted);margin:0 0 24px;}
 .hint::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;}
 .hint a{color:inherit;text-decoration:underline;text-underline-offset:3px;}
-.hint a:hover{color:var(--accent);}
+.hint a:hover{color:var(--creme);}
 .page-hero h1{font-size:var(--fs-6);line-height:1.1;margin:0 0 16px;letter-spacing:var(--ls-tight);}
-.page-hero p{font-size:var(--fs-3);color:var(--text-body);max-width:65ch;line-height:1.55;margin:0;}
+.page-hero p{font-size:var(--fs-3);color:var(--creme-muted);max-width:65ch;line-height:1.55;margin:0;}
 
 /* Kompaktere Variante für die drei Rechtsseiten */
 .page-hero.compact-hero{padding:64px 24px 48px;}
@@ -460,10 +470,10 @@ footer{background:var(--wein-fix);color:var(--creme);padding:56px 24px 0;margin-
 ::selection{background:var(--accent);color:var(--selection-text);}
 ::-moz-selection{background:var(--accent);color:var(--selection-text);}
 /* Auf farbigen/dunklen Flächen: Gold mit dunkler Schrift — dort klar sichtbar */
-footer ::selection{
+.hero ::selection,.page-hero ::selection,footer ::selection{
   background:var(--gold);color:var(--tinte-fix);
 }
-footer ::-moz-selection{
+.hero ::-moz-selection,.page-hero ::-moz-selection,footer ::-moz-selection{
   background:var(--gold);color:var(--tinte-fix);
 }
 
