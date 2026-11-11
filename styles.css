@@ -65,6 +65,7 @@
      dem hellen Himbeere-Wert: die aufgehellte Dunkel-Fassung (#C43A72) käme
      mit Creme nur auf 4,2:1 und verfehlte AA. */
   --himbeere-fix:#9B1E52;
+  --himbeere-hover:#B4265F;
   /* Einstiegsfläche: Wein mit leichter Aufhellung nach links, fest in beiden
      Themes. Gedämpftes Creme darauf erreicht am hellsten Rand noch 4,8:1. */
   --hero-bg:linear-gradient(to left, var(--wein-fix) 0%, var(--wein-fix) 62%, var(--wein-fix-2) 100%);
@@ -242,7 +243,7 @@ header.scrolled{
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   header,header.scrolled{background:var(--surface-glass-strong);}
 }
-/* Eine Kopfleiste: Logo, vier Menüpunkte, Sprache, Kontakt. Band, Rechtliches,
+/* Eine Kopfleiste: Logo, fünf Menüpunkte, Sprache, Kontakt. Band, Rechtliches,
    LinkedIn und Hell/Dunkel sind in den Footer bzw. ganz gewichen. */
 .nav-inner{max-width:1120px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
 nav.main-nav{display:flex;gap:32px;font-size:var(--fs-2);font-weight:600;}
@@ -333,7 +334,6 @@ nav.main-nav a:hover,nav.main-nav a.active{opacity:1;}
 /* Auf der Weinfläche ist der Hauptbutton hell — ein Himbeer-Button ginge im
    Wein unter. */
 .hero .cta-btn,.page-hero .cta-btn{background:var(--creme);color:var(--wein-fix);}
-.hero .cta-btn:hover,.page-hero .cta-btn:hover{background:#FFFFFF;}
 /* Zweite Handlung als Textlink statt als zweiter Button */
 .hero-link{font-size:var(--fs-2);font-weight:600;color:var(--text);transition:color .15s;}
 .hero-link:hover{color:var(--accent);}
@@ -505,6 +505,19 @@ footer{background:var(--wein-fix);color:var(--creme);padding:56px 24px 0;margin-
 /* Hover/Aktiv des Primär-Buttons geht laut Richtlinie von Himbeere auf Wein;
    die Varianten (Gold-Button, heller Button, Ghost) behalten ihre Fläche. */
 .cta-btn:not(.ghost):hover{background:var(--wein-fix);}
+/* Ausnahme Einstieg: Dort steht der Button hell auf der Weinfläche. Ginge er
+   beim Überfahren oder Antippen ebenfalls auf Wein, verschwände er im Grund
+   (Weinschrift auf Weinfläche). Er hellt stattdessen auf Weiß auf. Die Regel
+   steht bewusst nach der allgemeinen und ist gleich spezifisch aufgebaut. */
+.hero .cta-btn:not(.ghost):hover,.page-hero .cta-btn:not(.ghost):hover,
+.hero .cta-btn:not(.ghost):focus-visible,.page-hero .cta-btn:not(.ghost):focus-visible,
+.hero .cta-btn:not(.ghost):active,.page-hero .cta-btn:not(.ghost):active{background:#FFFFFF;color:var(--wein-fix);}
+/* Ausnahme Kopfleiste: Beim Scrollen ist sie Milchglas und nimmt über dem
+   Einstieg dessen Weinton an. Ein Button, der dort auf Wein wechselt, geht im
+   Grund unter. Er bleibt deshalb Himbeere und hellt nur eine Stufe auf. */
+.header-actions .cta-btn:not(.ghost):hover,
+.header-actions .cta-btn:not(.ghost):focus-visible,
+.header-actions .cta-btn:not(.ghost):active{background:var(--himbeere-hover);}
 
 .social-btn{transition:transform .2s ease, border-color .2s ease, color .2s ease;}
 .social-btn:hover{transform:translateY(-2px) rotate(-6deg);}
