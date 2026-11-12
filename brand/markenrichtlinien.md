@@ -94,8 +94,10 @@ während `#8B7D85` unverändert für Linien, Flächen und das Icon gilt.
    `Icon | haka-tax`. Überall, wo Icon und Firmenname gemeinsam auftreten —
    Header, Footer, Briefkopf, Signatur, Deckblätter.
 
-Es gibt **keine** Variante „Icon + Text ohne Trennstrich" und **keinen** Zusatz
-wie „Steuerberatung" innerhalb des Zeichens.
+Es gibt **keine** Variante „Icon + Text ohne Trennstrich", **keine** fette Fassung
+des Schriftzugs und **keinen** Zusatz wie „Steuerberatung" oder „Wirtschaftsprüfer
+Steuerberater" innerhalb des Zeichens. Die Berufsbezeichnung steht als Text in
+Fußzeile oder Absenderangabe.
 
 **Kritische Maßregel:** Die Höhe des Icons entspricht **exakt** der Höhe des
 kleinen „h" in „haka-tax" (Oberlänge bis Grundlinie). Icon-Unterkante =
