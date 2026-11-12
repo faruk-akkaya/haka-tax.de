@@ -1,7 +1,12 @@
 /* haka-tax.de — gemeinsames Stylesheet für alle Seiten.
    Vorher war dieser Block 8x identisch in jede HTML-Datei kopiert;
    jetzt gibt es genau eine Quelle, auf die alle Seiten per
-   <link rel="stylesheet" href="styles.css"> verweisen. */
+   <link rel="stylesheet" href="styles.css?v=JJJJ-MM-TT"> verweisen.
+
+   Der Versionsstand hinter ?v= muss bei jeder Änderung an dieser Datei oder
+   an main.js in allen HTML-Seiten hochgezählt werden. Sonst zeigen Browser,
+   die die alte Datei noch im Zwischenspeicher haben, weiter den alten Stand —
+   so blieb ein behobener Button-Fehler auf dem Handy sichtbar. */
 
 /* Hausschrift: Inter (SIL Open Font License 1.1).
    Schriftdateien liegen unter fonts/. Fallback: Segoe UI / system-ui.
