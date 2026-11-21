@@ -115,6 +115,9 @@
   --header-glass:rgba(255,255,255,.88);
   --header-glass-scrolled:rgba(255,255,255,.55);
   --header-glass-edge:rgba(255,255,255,.65);
+  /* Menü-Glas: deckender als die gescrollte Kopfleiste, damit der Text lesbar bleibt. */
+  --menu-glass:rgba(255,255,255,.8);
+  --menu-shadow:rgba(33,30,25,.1);
   --header-hairline:rgba(33,30,25,.08);
   --header-shadow:rgba(33,30,25,.14);
   --text:var(--tinte);
@@ -144,6 +147,8 @@
     --header-glass:rgba(27,23,20,.86);
     --header-glass-scrolled:rgba(27,23,20,.52);
     --header-glass-edge:rgba(240,236,225,.1);
+    --menu-glass:rgba(27,23,20,.8);
+    --menu-shadow:rgba(0,0,0,.35);
     --header-hairline:rgba(240,236,225,.1);
     --header-shadow:rgba(0,0,0,.45);
     --border-faint:#272219;
@@ -177,6 +182,8 @@
   --header-glass:rgba(27,23,20,.86);
   --header-glass-scrolled:rgba(27,23,20,.52);
   --header-glass-edge:rgba(240,236,225,.1);
+  --menu-glass:rgba(27,23,20,.8);
+  --menu-shadow:rgba(0,0,0,.35);
   --header-hairline:rgba(240,236,225,.1);
   --header-shadow:rgba(0,0,0,.45);
   --border-faint:#272219;
@@ -224,29 +231,42 @@ img{max-width:100%;display:block;}
 .container{max-width:1120px;margin:0 auto;padding:0 24px;}
 
 /* Header */
-/* Die Kopfleiste ist die einzige Glasfläche der Seite: in Ruhe deckend auf
-   dem Seitengrund, beim Scrollen echtes Milchglas — deutlich transparenter,
-   stark unscharf, mit angehobener Sättigung. Werte in --header-glass* je
-   Theme, damit Hell und Dunkel denselben Effekt in eigener Tonlage bekommen. */
+/* Glasflächen: die Kopfleiste und das aufgeklappte Menü auf dem Handy. Die
+   Kopfleiste ist in Ruhe deckend auf dem Seitengrund, beim Scrollen echtes
+   Milchglas — deutlich transparenter, stark unscharf, mit angehobener
+   Sättigung. Das Menü ist etwas deckender, damit die Menüpunkte immer gut
+   lesbar bleiben. Werte in --header-glass* und --menu-glass je Theme.
+
+   Das Glas der Kopfleiste liegt auf einer eigenen Ebene (header::before),
+   nicht auf dem header selbst: Ein Element mit backdrop-filter sperrt den
+   Glaseffekt seiner Kinder ein. Das Menü ist ein Kind der Kopfleiste und
+   hängt unter ihr — läge das Glas auf dem header, wäre das Menü nur
+   durchsichtig statt unscharf. */
 header{
   position:sticky;top:0;z-index:50;
-  background:var(--bg);
   box-shadow:inset 0 -1px 0 var(--header-hairline);
-  transition:background-color .3s ease, box-shadow .3s ease,
+  transition:box-shadow .3s ease;
+}
+header::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:var(--bg);
+  transition:background-color .3s ease,
              -webkit-backdrop-filter .3s ease, backdrop-filter .3s ease;
 }
 header.scrolled{
-  background:var(--header-glass-scrolled);
-  -webkit-backdrop-filter:blur(32px) saturate(1.6);
-  backdrop-filter:blur(32px) saturate(1.6);
   box-shadow:inset 0 1px 0 var(--header-glass-edge),
              inset 0 -1px 0 var(--header-hairline),
              var(--shadow-float);
 }
+header.scrolled::before{
+  background:var(--header-glass-scrolled);
+  -webkit-backdrop-filter:blur(32px) saturate(1.6);
+  backdrop-filter:blur(32px) saturate(1.6);
+}
 /* Browser ohne backdrop-filter bekommen eine deckendere Fläche, damit die
    Navigation nicht auf durchscheinendem Inhalt steht. */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-  header,header.scrolled{background:var(--surface-glass-strong);}
+  header::before,header.scrolled::before{background:var(--surface-glass-strong);}
 }
 /* Eine Kopfleiste: Logo, fünf Menüpunkte, Sprache, Kontakt. Band, Rechtliches,
    LinkedIn und Hell/Dunkel sind in den Footer bzw. ganz gewichen. */
@@ -293,12 +313,14 @@ nav.main-nav a:hover,nav.main-nav a.active{opacity:1;}
     display:flex;
     position:absolute;
     top:100%;left:0;right:0;
-    background:var(--bg);
+    background:var(--menu-glass);
+    -webkit-backdrop-filter:blur(24px) saturate(1.4);
+    backdrop-filter:blur(24px) saturate(1.4);
     flex-direction:column;
     gap:2px;
     padding:0 24px;
-    border-bottom:1px solid var(--border);
-    box-shadow:var(--shadow-float);
+    border-radius:0 0 var(--r-l) var(--r-l);
+    box-shadow:inset 0 -1px 0 var(--header-hairline), 0 16px 40px var(--menu-shadow);
     max-height:0;
     opacity:0;
     overflow:hidden;
@@ -313,8 +335,12 @@ nav.main-nav a:hover,nav.main-nav a.active{opacity:1;}
     transform:translateY(0);
     padding:10px 24px 18px;
   }
-  nav.main-nav a{padding:12px 4px;font-size:var(--fs-3);border-bottom:1px solid var(--border-faint);opacity:1;}
+  nav.main-nav a{padding:12px 4px;font-size:var(--fs-3);border-bottom:1px solid var(--header-hairline);opacity:1;}
+  nav.main-nav a:last-child{border-bottom:0;}
   .nav-toggle{display:flex;align-items:center;justify-content:center;}
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  @media (max-width:1140px){ nav.main-nav{background:var(--surface-glass-strong);} }
 }
 @media (max-width:520px){
   .header-actions .cta-btn{display:none;}
